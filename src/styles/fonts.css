@@ -1,0 +1,18 @@
+.font-family {
+    font-family: sans-serif;
+    line-height: 1.5;
+    font-size: 12px;
+    color: var(--text-primary-color);
+}
+
+.font-family--primary-color {
+    color: var(--text-primary-color);
+}
+
+.font-family--secondary-color {
+    color: var(--text-secondary-color);
+}
+
+.font-family--tertiary-color {
+    color: var(--text-tertiary-color);
+}

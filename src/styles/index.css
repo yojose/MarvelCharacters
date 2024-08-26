@@ -1,0 +1,22 @@
+:root {
+  /*--primary-color: #ec1d24;*/
+  --secondary-color: black;
+  --text-primary-color: white;
+  --text-secondary-color: black;
+  --text-tertiary-color: rgb(142, 142, 142);
+}
+
+@property --primary-color {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #ec1d24;
+}
+
+html,
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: #121212;
+  width: 100%;
+  min-width: 430px;
+}

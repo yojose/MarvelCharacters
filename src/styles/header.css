@@ -1,0 +1,48 @@
+.header{
+    background-color: var(--secondary-color);
+    height: 84px;
+    width: 100%;
+
+    & .header__container{
+        width: calc(100% - 32px);
+        height: 52px;
+        display: flex;
+        padding: 16px;
+        flex-direction: row;
+        justify-content: space-between;
+        
+
+        & .header__marvel-logo{
+            width:130px;
+            height:52px;
+            background-color: var(--primary-color);
+        }
+    
+        & .header__fav{
+            width: 56px;
+            height: 37.68px;
+            padding: 8px;
+            gap: 8px;
+            display: flex;
+            flex-direction: row;
+            
+            & .header__number-fav{
+                width:3px;
+                height: 21.68px;
+            }
+        }
+    }
+}
+
+.header--greenbg{
+    background-color: greenyellow;
+}
+
+
+.centerdiv{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}

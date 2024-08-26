@@ -1,0 +1,58 @@
+.characters__container{
+    width: 100%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap; 
+}
+.character-card{
+    width:172.5px;
+    height:245.97px;
+    flex:0 1 172.5px;
+    text-decoration: none;
+    & :hover {
+        text-decoration: none;
+    }
+}
+
+.character-card__container{
+    width: 100%;
+    height: 245.97px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.character-card_img{
+    width:172.5px;
+    height:189.97px;
+    border-bottom: 4px solid var(--primary-color);
+
+    > img{
+        width:172.5px;
+        height:189.97px;
+    }
+}
+.character-card__info{
+    width: calc(100% - 10px);
+    height: 57px;
+    display: flex;
+    padding: 5px;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--secondary-color);
+    background-image: url("../asset/img/Cut.png");
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    color: inherit;
+}
+.character-card__name{
+    width: 85%;
+    padding: 5px;
+    color: var(--text-primary-color);
+}
+.character-car__fav{
+    width: 15%;
+    padding: 5px;
+}
