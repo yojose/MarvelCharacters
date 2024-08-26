@@ -7,20 +7,14 @@ import './styles/search.css';
 
 import { RouterProvider } from "react-router-dom";
 import { router } from './router/router'
-import { createContext, useState } from "react";
-import { GlovalContext, GlovalContextData } from "./types/globalContextTypes"
-
-
-const GlobalContext = createContext<GlovalContext | undefined>(undefined);
+import { DefineGlobalContext } from './components/Contexts/globalContect';
 
 function App() {
-  const [globalContext, setGlobalContext] = useState<GlovalContextData>();
-  const context={globalContext, setGlobalContext};
   return (
-    <GlobalContext.Provider value={context}>
+    <DefineGlobalContext>
       <RouterProvider router={router} />
-    </GlobalContext.Provider>
+    </DefineGlobalContext>
   );
 }
 
-export { App, GlobalContext };
+export { App };

@@ -32,6 +32,6 @@ const SearchCharacters = ({onChange}:seachCharacters) => {
 
 const SearchCharactersResult = () => {
     const { globalContext } = useCharacterCardContext();
-    return (<div className="search__result">{globalContext?.characters.total} RESULT</div>);
+    return (<div className="search__result">{globalContext?.characters.count} RESULT</div>);
 }
 export default SearchCharacters;

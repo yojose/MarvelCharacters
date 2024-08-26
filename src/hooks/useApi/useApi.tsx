@@ -14,7 +14,7 @@ const defaultConfig = {
 };
 
 const getApiKeyParams = () => {
-    const ts = new Date().getTime();
+    const ts = new Date().getTime().toString();
     let message = "";
     let hash = "";
 
@@ -31,17 +31,18 @@ const getApiKeyParams = () => {
 
 const useApi = (path: string, options: AxiosRequestConfig = defaultConfig) => {
     const [data, setData] = useState<Data>();
-    const [isloading, setIsLoading] = useState<boolean | null>(false);
+    const [isloading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>();
-
     const abortControllerRef = useRef<AbortController | null>(null);
 
+
     useEffect(() => {
-        //const apiKeyParam: { ts: number, hash: string } = getApiKeyParams();
+
+        const apiKeyParam: { ts: string, hash: string } = getApiKeyParams();
         const optionsAxios = { ...options, ...defaultConfig, ...{ signal: abortControllerRef.current?.signal } };
 
-        //const url = `${baseUrl}${path}?ts=${apiKeyParam.ts}&apiKey=${publickey}&hash=${apiKeyParam.hash}`;
-        const alternativeUrl = "https://gateway.marvel.com/v1/public/characters?ts=1724595161654&apikey=996de6600f0fefd5d16ffc8e6a21adfd&hash=bf15456d981d3fed53b273d34a14d3c7";
+        const url = `${baseUrl}${path}?ts=${apiKeyParam.ts}&apiKey=${publickey}&hash=${apiKeyParam.hash}`;
+        const alternativeUrl = "https://gateway.marvel.com/v1/public/characters?ts=1724595161654&limit=50&apikey=996de6600f0fefd5d16ffc8e6a21adfd&hash=bf15456d981d3fed53b273d34a14d3c7";
 
         abortControllerRef.current?.abort();
         abortControllerRef.current = new AbortController();
@@ -50,20 +51,19 @@ const useApi = (path: string, options: AxiosRequestConfig = defaultConfig) => {
 
         const fetchData = async () => {
             try {
-                const response: AxiosResponse = await axios(alternativeUrl, optionsAxios);
-                setData(response.data);
-                //setData(testDataCharactaersList.data)
+                const response: AxiosResponse = await axios(url, { method: 'get', signal: abortControllerRef.current?.signal });
+                //setData(response.data.data);
+                setData(testDataCharactaersList.data)
+                setIsLoading(false);
             } catch (error) {
                 let message;
                 if (error instanceof Error) message = error.message
                 else message = String(error)
                 setError(message);
-            } finally {
-                setIsLoading(false);
             }
         }
         fetchData();
-    }, []);
+    }, [path]);
 
     return { data, isloading, error }
 }
