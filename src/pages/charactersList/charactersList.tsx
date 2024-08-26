@@ -3,13 +3,18 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import useApi from "../../hooks/useApi/useApi";
 import { Json, ResponseAPI, Data } from "../../types/apiTypes";
 import { CharacterCard } from "../../components/characterCard/characterCard"
+import SearchCharacters from "../../components/searchCharacters/searchCharacters";
+import { useDelay } from "../../hooks/useDelay";
 import '../../styles/app.css';
 import '../../styles/search.css';
 
 export const CharactersList: React.FC = () => {
 
     const [characterslist, setCharacterslist] = useState<Data>();
+    const [filter, setfilter] = useState<string>("");
     const { data, isloading, error } = useApi("/characters");
+
+    const delaySearch = useDelay(filter);
 
     useEffect(() => {
         console.log("isloading;" + isloading)
@@ -18,43 +23,28 @@ export const CharactersList: React.FC = () => {
         }
     }, [isloading]);
 
+    useEffect(() => {
+        console.log("delaySearch;" + delaySearch)
+    }, [delaySearch]);
+
     return (
         <>
+        <div>isloading:{isloading}</div>
             {isloading == false &&
-                <div>
-                    <section className="main-section">
-
-                        <search className="search">
-                            <div className="search__container">
-                                <form action="#" method="get" className="search__form">
-                                    <div className="icon__search"></div>
-                                    <label className="search__character-label">
-                                        <input
-                                            className="search__input"
-                                            type="text"
-                                            name="search_character"
-                                            id="search_character"
-                                            placeholder="SEARCH A CHARACTER"
-                                            maxLength={200} />
-                                    </label>
-                                </form>
-                                <div className="search__result">50 RESULT</div>
-                            </div>
-                        </search>
-
-                        <div className="characters__container">
-                            {data?.results.map((character) =>
-                                <CharacterCard character={character} favs={[]} key={character.id}>
-                                    <CharacterCard.img />
-                                    <CharacterCard.Title>
-                                        <CharacterCard.Name />
-                                        <CharacterCard.FavButton />
-                                    </CharacterCard.Title>
-                                </CharacterCard>
-                            )}
-                        </div>
-                    </section>
-                </div>
+                <section>
+                    <SearchCharacters onChange={setfilter} />
+                    <div className="characters__container">
+                        {data?.results.map((character) =>
+                            <CharacterCard character={character} favorites={[]} key={character.id}>
+                                <CharacterCard.img />
+                                <CharacterCard.Title>
+                                    <CharacterCard.Name />
+                                    <CharacterCard.FavButton />
+                                </CharacterCard.Title>
+                            </CharacterCard>
+                        )}
+                    </div>
+                </section>
             }
         </>
     )

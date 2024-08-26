@@ -7,7 +7,7 @@ export const MainPageLayout: React.FC = () => {
 
     return (
         <div id="root" className="app font-family">
-            <header className="header font-family--primary-color">
+            <header className="header text--primary-color">
                 <div className="header__container">
                     <div className="header__marvel-logo">
                         <img src={logo} alt="Logo Marvel" />

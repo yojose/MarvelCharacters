@@ -5,14 +5,14 @@
     color: var(--text-primary-color);
 }
 
-.font-family--primary-color {
+.text--primary-color {
     color: var(--text-primary-color);
 }
 
-.font-family--secondary-color {
+.text--secondary-color {
     color: var(--text-secondary-color);
 }
 
-.font-family--tertiary-color {
+.text--tertiary-color {
     color: var(--text-tertiary-color);
 }

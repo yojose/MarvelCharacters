@@ -50,9 +50,9 @@ const useApi = (path: string, options: AxiosRequestConfig = defaultConfig) => {
 
         const fetchData = async () => {
             try {
-                //const response: AxiosResponse = await axios(alternativeUrl, optionsAxios);
-                //setData(response.data);
-                setData(testDataCharactaersList.data)
+                const response: AxiosResponse = await axios(alternativeUrl, optionsAxios);
+                setData(response.data);
+                //setData(testDataCharactaersList.data)
             } catch (error) {
                 let message;
                 if (error instanceof Error) message = error.message
