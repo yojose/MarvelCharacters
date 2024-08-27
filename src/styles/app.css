@@ -5,11 +5,15 @@
   width: 100%;
 }
 
-.main{
+.section{
   width: calc(100% - 32pX);
   padding: 16px;
 }
 
-.main-section{
+.section--no-pading{
+  width: 100%;
+}
+
+.main{
   width: 100%;
 }

@@ -62,7 +62,7 @@ export interface StoriesItem {
     type:        Type;
 }
 
-export type Type="cover" |"interiorStory";
+export type Type=string;
 
 export interface Thumbnail {
     path:      string;

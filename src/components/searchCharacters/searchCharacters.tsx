@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CharacterCardProps, UseCharacterCardContext } from "../../types/charactersTypes";
 import { PropsWithChildren } from 'react';
 import { Link } from "react-router-dom";
-import useCharacterCardContext from "../../hooks/useGlobalContext/useGlobalContext"
+import useCharactersContext from "../../hooks/useCharactersContext"
 import '../../styles/search.css';
 import {seachCharacters} from "../../types/searchCharactersTypes"
 
@@ -31,7 +31,7 @@ const SearchCharacters = ({onChange}:seachCharacters) => {
 }
 
 const SearchCharactersResult = () => {
-    const { globalContext } = useCharacterCardContext();
-    return (<div className="search__result">{globalContext?.characters.count} RESULT</div>);
+    const CharactersContext = useCharactersContext();
+    return (<div className="search__result">{CharactersContext?.count} RESULT</div>);
 }
 export default SearchCharacters;

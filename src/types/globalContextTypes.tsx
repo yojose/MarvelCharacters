@@ -7,7 +7,7 @@ export interface GlovalContext{
 }
 
 export interface GlovalContextData{
-    characters:Data;
+    characters:Data | undefined;
     favorites:Favorites;
 }
 

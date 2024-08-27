@@ -38,7 +38,7 @@ CharacterCard.img = () => {
     const { character } = useCharacterCardContext();
     return (
         <div className="character-card_img">
-            <img src={`${character.thumbnail.path}/portrait_fantastic.${character.thumbnail.extension}`} alt="Logo Marvel" />
+            <img loading="lazy" src={`${character.thumbnail.path}/portrait_fantastic.${character.thumbnail.extension}`} alt={`${character.name} image}`} />
         </div>
     )
 }

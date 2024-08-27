@@ -37,22 +37,39 @@ const useApi = (path: string, options: AxiosRequestConfig = defaultConfig) => {
 
 
     useEffect(() => {
-
-        const apiKeyParam: { ts: string, hash: string } = getApiKeyParams();
-        const optionsAxios = { ...options, ...defaultConfig, ...{ signal: abortControllerRef.current?.signal } };
-
-        const url = `${baseUrl}${path}?ts=${apiKeyParam.ts}&apiKey=${publickey}&hash=${apiKeyParam.hash}`;
-        const alternativeUrl = "https://gateway.marvel.com/v1/public/characters?ts=1724595161654&limit=50&apikey=996de6600f0fefd5d16ffc8e6a21adfd&hash=bf15456d981d3fed53b273d34a14d3c7";
+        console.debug("options change")
+        //const apiKeyParam: { ts: string, hash: string } = getApiKeyParams();
 
         abortControllerRef.current?.abort();
         abortControllerRef.current = new AbortController();
+
+        //const optionsAxios = { ...options,...{ baseURL: baseUrl,signal: abortControllerRef.current?.signal } };
+
+        const defaultOptionsAxios={
+            method: 'get',
+            baseURL: baseUrl,
+            signal: abortControllerRef.current?.signal ,
+            params: {
+                ts:"1724595161654",
+                apikey:"996de6600f0fefd5d16ffc8e6a21adfd",
+                hash:"bf15456d981d3fed53b273d34a14d3c7"
+            }
+        }
+
+        const optionsAxios = { ...defaultOptionsAxios,...options,...{params:{...defaultOptionsAxios.params,...options.params}}};
+
+        //const url = "https://gateway.marvel.com/v1/public/characters"+"?ts=1724595161654&limit=50&apiKey=996de6600f0fefd5d16ffc8e6a21adfd&hash=bf15456d981d3fed53b273d34a14d3c7&limit=50";
+        const alternativeUrl = "https://gateway.marvel.com/v1/public/characters?ts=1724595161654&limit=50&apikey=996de6600f0fefd5d16ffc8e6a21adfd&hash=bf15456d981d3fed53b273d34a14d3c7";
+
+        
 
         setIsLoading(true);
 
         const fetchData = async () => {
             try {
-                const response: AxiosResponse = await axios(url, { method: 'get', signal: abortControllerRef.current?.signal });
+                //const response: AxiosResponse = await axios(path, optionsAxios);
                 //setData(response.data.data);
+                console.log(testDataCharactaersList.data)
                 setData(testDataCharactaersList.data)
                 setIsLoading(false);
             } catch (error) {
@@ -63,7 +80,7 @@ const useApi = (path: string, options: AxiosRequestConfig = defaultConfig) => {
             }
         }
         fetchData();
-    }, [path]);
+    }, [options]);
 
     return { data, isloading, error }
 }

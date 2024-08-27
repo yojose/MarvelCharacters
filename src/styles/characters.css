@@ -5,6 +5,7 @@
     flex-direction: row;
     justify-content: center;
     gap: 10px;
+    row-gap: 25px;
     flex-wrap: wrap; 
 }
 .character-card{

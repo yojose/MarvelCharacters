@@ -14,3 +14,15 @@ export interface UseCharacterCardContext {
 export interface CharacterCardImg {
     src:string;
 };
+
+export interface optionAxios{
+    method: string,
+    params: {
+        ts?:string,
+        limit?: number,
+        offset?:number,
+        apikey?:string,
+        hash?:string,
+        nameStartsWith?:string
+    }
+}
