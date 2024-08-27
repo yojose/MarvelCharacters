@@ -2,7 +2,7 @@ import React from 'react';
 import './styles/index.css';
 import './styles/app.css';
 import './styles/icons.css';
-
+import './styles/fonts.css';
 import './styles/search.css';
 
 import { RouterProvider } from "react-router-dom";

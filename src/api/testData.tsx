@@ -16,7 +16,7 @@ export const testDataCharactaersList:ResponseAPI={
           {
               "id": 1011334,
               "name": "3-D Man",
-              "description": "",
+              "description": "Using his mighty ability to control magnetic fields, the one called Magneto fights to help mutants replace humans as the world's dominant species.",
               "modified": "2014-04-29T14:18:17-0400",
               "thumbnail": {
                   "path": "http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784",

@@ -1,0 +1,60 @@
+.comics{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.comics__container{
+    width: 960px;
+    min-height: 340px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    > h2{
+        width: 960px;
+        font-size: 32px;
+    }
+}
+.comics__catalog{
+    width: 960px;
+    min-height: 340px;
+    overflow-x: scroll;
+}
+.comics__scroll{
+    width: fit-content;
+    min-height: 340px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 16px;
+}
+.comic{
+    width:179.2px;
+    height:340.8px;
+}
+.comic__img{
+    width: 179.2px;
+    height: 268.8px;
+    > img{
+        width: 179.2px;
+        height: 268.8px;
+    }
+}
+.comic__information{
+    width: calc(100% - 10px);
+    padding: 0 5px;
+}
+.comic__name{
+    width: 179.2px;
+    height: 38px;
+    padding: 5px 0;
+    margin: 0px;
+    font-size: 16px;
+}
+.comic__year{
+    width: 179.2px;
+    height: 14px;
+    font-size: 12px;
+}
