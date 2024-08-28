@@ -23,7 +23,7 @@ export {CharacterCard, CharacterCardContext};
 
 
 
-CharacterCard.Title = function PostCardTitle({ children }: PropsWithChildren) {
+CharacterCard.Title = function title({ children }: PropsWithChildren) {
     const { character } = useCharacterCardContext();
     return (
         <Link to={`../character/${character.id}`} key={1} style={{ textDecoration: "none" }}>
@@ -43,7 +43,7 @@ CharacterCard.img = () => {
     )
 }
 
-CharacterCard.Name = function PostCardTitle() {
+CharacterCard.Name = function name() {
     const { character } = useCharacterCardContext();
 
     return (
@@ -53,7 +53,7 @@ CharacterCard.Name = function PostCardTitle() {
     )
 };
 
-CharacterCard.FavButton = function PostCardTitle() {
+CharacterCard.FavButton = function facButton() {
     const { character,favorites} = useCharacterCardContext();
     return (
         <div className="character-car__fav">

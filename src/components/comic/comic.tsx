@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import useApi from "../../hooks/useApi/useApi";
-import { optionAxios } from "../../types/charactersTypes"
-import '../../styles/character.css';
+import { optionAxios } from "../../types/comicTypes"
+import '../../styles/comic.css';
+import { ComicCard } from "../../components/Cards/comicCard";
+import { ComicsResult } from "../../types/apiTypes";
 
+interface comicProps{
+    id:string | undefined;
+}
 
-export const Character: React.FC = () => {
-    const { id } = useParams();
+export const Comic: React.FC<comicProps> = ({id}) => {
     const path = `/${id}/comic`;
     const maxcharacters = 50;
     const [optionAxios, setOptionAxios] = useState<optionAxios>({
@@ -16,7 +20,7 @@ export const Character: React.FC = () => {
             offset: 0,
         }
     });
-    const { data, isloading, error } = useApi(path, optionAxios);
+    const { data, isloading, error } = useApi<ComicsResult[]>(path, optionAxios);
 
     useEffect(() => {
         console.log(data);
@@ -25,26 +29,26 @@ export const Character: React.FC = () => {
     return (
         <>
             {(isloading === false) &&
-                <section className="section--no-pading">
-                    <div className="character__container">
-                        <div className="character__header">
-                            <div className="character__infromation_container">
-                                <div className="character__img">
-                                    <img loading="lazy" src={`${data?.results[0].thumbnail.path}/portrait_fantastic.${data?.results[0].thumbnail.extension}`} alt={`${data?.results[0].name} image}`} />
-                                </div>
-                                <div className="character__information">
-                                    <div className="character__name-container">
-                                        <div className="character__name text--size text--primary-color">{data?.results[0].name}</div>
-                                        <div className="character__name-favs">
-                                            <div className="icon-fav">{id}</div>
-                                        </div>
-                                    </div>
-                                    <div className="character__description">{data?.results[0].description}</div>
-                                </div>
-                            </div>
+                <section className="comics">
+                <div className="comics__container text--secondary-color">
+                    <h2>
+                        COMICS
+                    </h2>
+                    <div className="comics__catalog">
+                        <div className="comics__scroll">
+                        {data?.results.map((comic) =>
+                            <ComicCard comic={comic} key={comic.id}>
+                                <ComicCard.img />
+                                <ComicCard.Title>
+                                    <ComicCard.Name />
+                                    <ComicCard.Year />
+                                </ComicCard.Title>
+                            </ComicCard>
+                        )}
                         </div>
                     </div>
-                </section>
+                </div>
+            </section>
             }
         </>
     )

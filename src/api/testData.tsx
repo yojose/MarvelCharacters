@@ -1,6 +1,6 @@
-import {ResponseAPI} from "../types/apiTypes"
+import {ResponseAPI,CharacterResult} from "../types/apiTypes"
 
-export const testDataCharactaersList:ResponseAPI={
+export const testDataCharactaersList:ResponseAPI<CharacterResult[]>={
   code: 200,
   status: "Ok",
   copyright: "© 2024 MARVEL",

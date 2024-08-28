@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import useApi from "../../hooks/useApi/useApi";
 import { Json, ResponseAPI, Data, CharacterResult } from "../../types/apiTypes";
 import { CharacterCard } from "../../components/Cards/characterCard"
-import SearchCharacters from "../../components/searchCharacters/searchCharacters";
+import SearchCharacters from "../../components/Search/searchCharacters";
 import { useDelay } from "../../hooks/useDelay";
 import '../../styles/app.css';
 import '../../styles/search.css';
@@ -12,12 +12,15 @@ import { GlovalContext, GlovalContextData } from "../../types/globalContextTypes
 import {optionAxios} from "../../types/charactersTypes"
 
 
-export const CharactersContext = createContext<Data | undefined>(undefined);
+export const CharactersContext = createContext<Data<CharacterResult[]> | undefined>(undefined);
 
 export const Characters: React.FC = () => {
     const [filter, setfilter] = useState<string>("");
     const [path, setpath] = useState<string>("");
     const maxcharacters=50;
+    
+    const { globalContext, setGlobalContext } = useGlobalContext();
+    const delaySearch = useDelay(filter);
     const [optionAxios, setOptionAxios] = useState<optionAxios>({
         method: 'get',
         params: {
@@ -25,19 +28,18 @@ export const Characters: React.FC = () => {
             offset:0,
         }
     });
-    const { data, isloading, error } = useApi(path,optionAxios);
-    const { globalContext, setGlobalContext } = useGlobalContext();
-    const delaySearch = useDelay(filter);
+
+    const { data, isloading, error } = useApi<CharacterResult[]>(path,optionAxios);
 
     useEffect(() => {
         const udpadeCharacters = () => {
             let newglobalContext:GlovalContextData;
             if(globalContext!==undefined){
                 newglobalContext={ ...globalContext, ...{ characters: {
-                    results:data?.results} as Data } };
+                    results:data?.results} as Data<CharacterResult[]> } };
             }else{
-                newglobalContext={...{characters:{} as Data,favorites: []},...{ characters: {
-                    results:data?.results} as Data }}
+                newglobalContext={...{characters:{} as Data<CharacterResult>,favorites: []},...{ characters: {
+                    results:data?.results} as Data<CharacterResult[]> }}
             }
             setGlobalContext(newglobalContext);
         }

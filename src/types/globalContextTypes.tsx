@@ -1,4 +1,4 @@
-import {Data,Favorites} from "./apiTypes"
+import {Data,Favorites, CharacterResult} from "./apiTypes"
 
 
 export interface GlovalContext{
@@ -7,7 +7,7 @@ export interface GlovalContext{
 }
 
 export interface GlovalContextData{
-    characters:Data | undefined;
+    characters:Data<CharacterResult[]> | undefined;
     favorites:Favorites;
 }
 

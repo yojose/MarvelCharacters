@@ -4,6 +4,7 @@ import { publickey, privatekey, baseUrl, charactersLimit } from "../../api/confi
 import { Md5 } from 'ts-md5';
 import { Data } from "../../types/apiTypes";
 import { testDataCharactaersList } from "../../api/testData"
+import { testDataComicList } from "../../api/testDataComic"
 
 const defaultConfig = {
     method: 'get',
@@ -29,8 +30,8 @@ const getApiKeyParams = () => {
     return { ts, hash }
 }
 
-const useApi = (path: string, options: AxiosRequestConfig = defaultConfig) => {
-    const [data, setData] = useState<Data>();
+const useApi = function useAPI<T>(path: string, options: AxiosRequestConfig = defaultConfig){
+    const [data, setData] = useState<Data<T>>();
     const [isloading, setIsLoading] = useState<boolean>(false);
     const [error, setError] = useState<string>();
     const abortControllerRef = useRef<AbortController | null>(null);
@@ -69,8 +70,12 @@ const useApi = (path: string, options: AxiosRequestConfig = defaultConfig) => {
             try {
                 //const response: AxiosResponse = await axios(path, optionsAxios);
                 //setData(response.data.data);
-                console.log(testDataCharactaersList.data)
-                setData(testDataCharactaersList.data)
+                console.log(path.split("/").slice(-1))
+                if("comic"!==(path.split("/").slice(-1).toString())){
+                    setData(testDataCharactaersList.data as Data<T>)
+                }else{
+                    setData(testDataComicList.data as Data<T>)
+                }
                 setIsLoading(false);
             } catch (error) {
                 let message;

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import useApi from "../../hooks/useApi/useApi";
 import { optionAxios } from "../../types/charactersTypes"
+import { Data, CharacterResult } from "../../types/apiTypes";
 import '../../styles/character.css';
-import '../../styles/comic.css';
+import {Comic} from "../../components/Comic/comic";
 
 
 export const Character: React.FC = () => {
@@ -17,7 +18,7 @@ export const Character: React.FC = () => {
             offset: 0,
         }
     });
-    const { data, isloading, error } = useApi(path, optionAxios);
+    const { data, isloading, error } = useApi<CharacterResult[]>(path, optionAxios);
 
     useEffect(() => {
         console.log(data);
@@ -45,108 +46,7 @@ export const Character: React.FC = () => {
                             </div>
                         </div>
                     </article>
-                    <section className="comics">
-                        <div className="comics__container text--secondary-color">
-                            <h2>
-                                COMICS
-                            </h2>
-                            <div className="comics__catalog">
-                                <div className="comics__scroll">
-
-                                    <article className="comic">
-                                        <div className="comic__img">
-                                            <img loading="lazy" src={`${data?.results[0].thumbnail.path}/portrait_fantastic.${data?.results[0].thumbnail.extension}`} alt={`${data?.results[0].name} image}`} />
-                                        </div>
-                                        <div className="comic__information text--secondary-color">
-                                            <h2 className="comic__name --text-secondary-color roboto-condensed--500">comic name</h2>
-                                            <div className="comic__year roboto-condensed--600">1980</div>
-                                        </div>
-                                    </article>
-
-                                    <article className="comic">
-                                        <div className="comic__img">
-                                            <img loading="lazy" src={`${data?.results[0].thumbnail.path}/portrait_fantastic.${data?.results[0].thumbnail.extension}`} alt={`${data?.results[0].name} image}`} />
-                                        </div>
-                                        <div className="comic__information">
-                                            <h2 className="comic__name text--size text--primary-color">comic name</h2>
-                                            <div className="comic__year">1980</div>
-                                        </div>
-                                    </article>
-
-                                    <article className="comic">
-                                        <div className="comic__img">
-                                            <img loading="lazy" src={`${data?.results[0].thumbnail.path}/portrait_fantastic.${data?.results[0].thumbnail.extension}`} alt={`${data?.results[0].name} image}`} />
-                                        </div>
-                                        <div className="comic__information">
-                                            <h2 className="comic__name text--size text--primary-color">comic name</h2>
-                                            <div className="comic__year">1980</div>
-                                        </div>
-                                    </article>
-
-                                    <article className="comic">
-                                        <div className="comic__img">
-                                            <img loading="lazy" src={`${data?.results[0].thumbnail.path}/portrait_fantastic.${data?.results[0].thumbnail.extension}`} alt={`${data?.results[0].name} image}`} />
-                                        </div>
-                                        <div className="comic__information">
-                                            <h2 className="comic__name text--size text--primary-color">comic name</h2>
-                                            <div className="comic__year">1980</div>
-                                        </div>
-                                    </article>
-
-                                    <article className="comic">
-                                        <div className="comic__img">
-                                            <img loading="lazy" src={`${data?.results[0].thumbnail.path}/portrait_fantastic.${data?.results[0].thumbnail.extension}`} alt={`${data?.results[0].name} image}`} />
-                                        </div>
-                                        <div className="comic__information">
-                                            <h2 className="comic__name text--size text--primary-color">comic name</h2>
-                                            <div className="comic__year">1980</div>
-                                        </div>
-                                    </article>
-
-                                    <article className="comic">
-                                        <div className="comic__img">
-                                            <img loading="lazy" src={`${data?.results[0].thumbnail.path}/portrait_fantastic.${data?.results[0].thumbnail.extension}`} alt={`${data?.results[0].name} image}`} />
-                                        </div>
-                                        <div className="comic__information">
-                                            <h2 className="comic__name text--size text--primary-color">comic name</h2>
-                                            <div className="comic__year">1980</div>
-                                        </div>
-                                    </article>
-
-                                    <article className="comic">
-                                        <div className="comic__img">
-                                            <img loading="lazy" src={`${data?.results[0].thumbnail.path}/portrait_fantastic.${data?.results[0].thumbnail.extension}`} alt={`${data?.results[0].name} image}`} />
-                                        </div>
-                                        <div className="comic__information">
-                                            <h2 className="comic__name text--size text--primary-color">comic name</h2>
-                                            <div className="comic__year">1980</div>
-                                        </div>
-                                    </article>
-
-                                    <article className="comic">
-                                        <div className="comic__img">
-                                            <img loading="lazy" src={`${data?.results[0].thumbnail.path}/portrait_fantastic.${data?.results[0].thumbnail.extension}`} alt={`${data?.results[0].name} image}`} />
-                                        </div>
-                                        <div className="comic__information">
-                                            <h2 className="comic__name text--size text--primary-color">comic name</h2>
-                                            <div className="comic__year">1980</div>
-                                        </div>
-                                    </article>
-
-                                    <article className="comic">
-                                        <div className="comic__img">
-                                            <img loading="lazy" src={`${data?.results[0].thumbnail.path}/portrait_fantastic.${data?.results[0].thumbnail.extension}`} alt={`${data?.results[0].name} image}`} />
-                                        </div>
-                                        <div className="comic__information">
-                                            <h2 className="comic__name text--size text--primary-color">comic name</h2>
-                                            <div className="comic__year">1980</div>
-                                        </div>
-                                    </article>
-
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                    {id!==undefined &&<Comic id={id}/>}
                 </section>
             }
 
