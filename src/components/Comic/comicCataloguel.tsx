@@ -1,9 +1,8 @@
 import React, { useState, useEffect,memo } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
 import useApi from "../../hooks/useApi/useApi";
 import { optionAxios } from "../../types/comicTypes"
 import '../../styles/comic.css';
-import { ComicCard } from "../../components/Cards/comicCard";
+import { ComicCard } from "../Cards/comicCard";
 import { ComicsResult } from "../../types/apiTypes";
 
 interface comicProps{

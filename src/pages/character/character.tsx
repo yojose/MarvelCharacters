@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import React, { useState, useContext, useMemo } from "react";
+import { useParams } from "react-router-dom";
 import useApi from "../../hooks/useApi/useApi";
 import { optionAxios } from "../../types/charactersTypes"
-import { Data, CharacterResult } from "../../types/apiTypes";
+import { CharacterResult } from "../../types/apiTypes";
 import '../../styles/character.css';
-import Comic from "../../components/Comic/comic";
+import Comic from "../../components/Comic/comicCataloguel";
+import { FavoritesContext } from "../../components/Contexts/favoritesContect"
+import useFavoritesContext from "../../hooks/useContexts/useFavoritesContext";
+import { FavoriteIcon } from "../../components/favoritesIcon/favoritesIcon"
 
 
 export const Character: React.FC = () => {
@@ -19,15 +22,30 @@ export const Character: React.FC = () => {
         }
     });
     const { data, isloading, error } = useApi<CharacterResult[]>(path, optionAxios);
+    const { favorites } = useContext(FavoritesContext);
+    const { changeFavoritos, isOnFavoritos } = useFavoritesContext();
 
-    useEffect(() => {
+    const isFavorito = useMemo(() => {
+        if (id !== undefined) {
+            return isOnFavoritos(parseInt(id));
+        } else {
+            return false;
+        }
+    },[id, favorites]);
 
-    }, [data]);
+    const HandleClick=(e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        
+        e.stopPropagation();
+        if(id !== undefined) changeFavoritos(parseInt(id));
+        console.debug(favorites)
+        e.preventDefault();
+    }
 
-    console.log("render character isloading:"+isloading);
+    console.log("render character isloading:" + isloading);
+
     return (
         <>
-            {(isloading === false) &&
+            {(isloading === false && id !== undefined) &&
                 <section className="section--no-pading">
                     <article className="character__container">
                         <div className="character__header">
@@ -38,8 +56,9 @@ export const Character: React.FC = () => {
                                 <div className="character__information">
                                     <div className="character__name-container">
                                         <h2 className="character__name text--primary-color roboto-condensed--700">{data?.results[0].name}</h2>
-                                        <div className="character__name-favs">
-                                            <div className="icon-fav">{id}</div>
+                                        <div className="character__name-favs"
+                                            onClick={HandleClick}>
+                                            <FavoriteIcon isFavorite={isFavorito} />
                                         </div>
                                     </div>
                                     <p className="character__description roboto-condensed--700">{data?.results[0].description}</p>
@@ -47,7 +66,7 @@ export const Character: React.FC = () => {
                             </div>
                         </div>
                     </article>
-                    {id!==undefined &&<Comic id={id}/>}
+                    {id !== undefined && <Comic id={id} />}
                 </section>
             }
 

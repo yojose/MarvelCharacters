@@ -1,14 +1,11 @@
-import React, { useState, useEffect, useCallback,createContext } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useRef,createContext } from "react";
 import useApi from "../../hooks/useApi/useApi";
-import { Json, ResponseAPI, Data, CharacterResult } from "../../types/apiTypes";
+import { Data, CharacterResult } from "../../types/apiTypes";
 import { CharacterCard } from "../../components/Cards/characterCard"
 import SearchCharacters from "../../components/Search/searchCharacters";
 import { useDelay } from "../../hooks/useDelay";
 import '../../styles/app.css';
 import '../../styles/search.css';
-import useGlobalContext from "../../hooks/useGlobalContext/useGlobalContext";
-import { GlovalContext, GlovalContextData } from "../../types/globalContextTypes"
 import {optionAxios} from "../../types/charactersTypes"
 
 
@@ -17,9 +14,8 @@ export const CharactersContext = createContext<Data<CharacterResult[]> | undefin
 export const Characters: React.FC = () => {
     const [filter, setfilter] = useState<string>("");
     const [path, setpath] = useState<string>("/characters");
-    const maxcharacters=50;
+    const maxcharacters=5;
     const delaySearch = useDelay(filter);
-    const { globalContext, setGlobalContext } = useGlobalContext();
     const [optionAxios, setOptionAxios] = useState<optionAxios>({
         method: 'get',
         params: {
@@ -28,9 +24,9 @@ export const Characters: React.FC = () => {
         }
     });
 
-    const { data, isloading, error } = useApi<CharacterResult[]>(path,optionAxios);
+    const { data, isloading, error} = useApi<CharacterResult[]>(path,optionAxios);
 
-    useEffect(() => {
+    /*useEffect(() => {
         const udpadeCharacters = () => {
             let newglobalContext:GlovalContextData;
             if(globalContext!==undefined){
@@ -46,7 +42,17 @@ export const Characters: React.FC = () => {
         if (data !== undefined) {
             udpadeCharacters();
         }
-    }, [data]);
+    }, [data]);*/
+
+    /*useEffect(()=>{
+        if (first.current) {
+            first.current = false;
+            return;
+          }
+        //fetchRequest();
+    },[])*/
+
+    console.debug("render Characters")
 
     return (
         <>

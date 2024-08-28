@@ -32,13 +32,11 @@ const getApiKeyParams = () => {
 
 const useApi = function useAPI<T>(path: string, options: AxiosRequestConfig = defaultConfig){
     const [data, setData] = useState<Data<T>>();
-    const [isloading, setIsLoading] = useState<boolean>(false);
+    const [isloading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string>();
     const abortControllerRef = useRef<AbortController | null>(null);
 
-
     useEffect(() => {
-        console.debug("options change")
         //const apiKeyParam: { ts: string, hash: string } = getApiKeyParams();
 
         abortControllerRef.current?.abort();
@@ -60,7 +58,7 @@ const useApi = function useAPI<T>(path: string, options: AxiosRequestConfig = de
         const optionsAxios = { ...defaultOptionsAxios,...options,...{params:{...defaultOptionsAxios.params,...options.params}}};
 
         //const url = "https://gateway.marvel.com/v1/public/characters"+"?ts=1724595161654&limit=50&apiKey=996de6600f0fefd5d16ffc8e6a21adfd&hash=bf15456d981d3fed53b273d34a14d3c7&limit=50";
-        const alternativeUrl = "https://gateway.marvel.com/v1/public/characters?ts=1724595161654&limit=50&apikey=996de6600f0fefd5d16ffc8e6a21adfd&hash=bf15456d981d3fed53b273d34a14d3c7";
+        //const alternativeUrl = "https://gateway.marvel.com/v1/public/characters?ts=1724595161654&limit=50&apikey=996de6600f0fefd5d16ffc8e6a21adfd&hash=bf15456d981d3fed53b273d34a14d3c7";
 
         
 
@@ -68,14 +66,14 @@ const useApi = function useAPI<T>(path: string, options: AxiosRequestConfig = de
 
         const fetchData = async () => {
             try {
-                //const response: AxiosResponse = await axios(path, optionsAxios);
-                //setData(response.data.data);
-                console.log(path.split("/").slice(-1))
-                if("comic"!==(path.split("/").slice(-1).toString())){
+                const response: AxiosResponse = await axios(path, optionsAxios);
+                setData(response.data.data);
+                
+                /*if("comic"!==(path.split("/").slice(-1).toString())){
                     setData(testDataCharactaersList.data as Data<T>)
                 }else{
                     setData(testDataComicList.data as Data<T>)
-                }
+                }*/
                 setIsLoading(false);
             } catch (error) {
                 let message;

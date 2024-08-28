@@ -1,5 +1,5 @@
 import {useContext } from "react";
-import {ComicCardContext} from "../components/Cards/comicCard";
+import {ComicCardContext} from "../../components/Cards/comicCard";
 
 export default function useCharactersContext() {
     const context = useContext(ComicCardContext);

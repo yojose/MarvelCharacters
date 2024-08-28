@@ -2,7 +2,7 @@ import React, { createContext } from "react";
 import { ComicCardProps, UseComicCardContext } from "../../types/comicTypes";
 import { PropsWithChildren } from 'react';
 import { Link } from "react-router-dom";
-import useComicCardContext from "../../hooks/useComicCardContext"
+import useComicCardContext from "../../hooks/useContexts/useComicCardContext"
 import '../../styles/characters.css';
 
 const ComicCardContext = createContext<UseComicCardContext | undefined>(undefined);
@@ -62,7 +62,7 @@ ComicCard.Year = function year() {
     const { comic } = useComicCardContext();
     return (
         <div className="comic__year roboto-condensed--600">
-            {comic.dates.map((d)=> {if(d.type=="onsaleDate"){
+            {comic.dates?.map((d)=> {if(d.type=="onsaleDate"){
                 const date1 = new Date(d.date);
                 return date1.getFullYear()}})}
         </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { CharacterCardProps, UseCharacterCardContext } from "../../types/charactersTypes";
 import { PropsWithChildren } from 'react';
 import { Link } from "react-router-dom";
-import useCharactersContext from "../../hooks/useCharactersContext"
+import useCharactersContext from "../../hooks/useContexts/useCharactersContext"
 import '../../styles/search.css';
 import {seachCharacters} from "../../types/searchCharactersTypes"
 

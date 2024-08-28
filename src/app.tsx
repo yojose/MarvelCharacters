@@ -8,12 +8,15 @@ import './styles/search.css';
 import { RouterProvider } from "react-router-dom";
 import { router } from './router/router'
 import { DefineGlobalContext } from './components/Contexts/globalContect';
+import { FavoritesContextProvider } from "./components/Contexts/favoritesContect";
 
 function App() {
   return (
-    <DefineGlobalContext>
-      <RouterProvider router={router} />
-    </DefineGlobalContext>
+    <FavoritesContextProvider>
+      <DefineGlobalContext>
+        <RouterProvider router={router} />
+      </DefineGlobalContext>
+    </FavoritesContextProvider>
   );
 }
 
