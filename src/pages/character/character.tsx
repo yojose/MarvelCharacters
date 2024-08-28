@@ -22,24 +22,6 @@ export const Character: React.FC = () => {
         }
     });
     const { data, isloading, error } = useApi<CharacterResult[]>(path, optionAxios);
-    const { favorites } = useContext(FavoritesContext);
-    const { changeFavoritos, isOnFavoritos } = useFavoritesContext();
-
-    const isFavorito = useMemo(() => {
-        if (id !== undefined) {
-            return isOnFavoritos(parseInt(id));
-        } else {
-            return false;
-        }
-    },[id, favorites]);
-
-    const HandleClick=(e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-        
-        e.stopPropagation();
-        if(id !== undefined) changeFavoritos(parseInt(id));
-        console.debug(favorites)
-        e.preventDefault();
-    }
 
     console.log("render character isloading:" + isloading);
 
@@ -56,10 +38,7 @@ export const Character: React.FC = () => {
                                 <div className="character__information">
                                     <div className="character__name-container">
                                         <h2 className="character__name text--primary-color roboto-condensed--700">{data?.results[0].name}</h2>
-                                        <div className="character__name-favs"
-                                            onClick={HandleClick}>
-                                            <FavoriteIcon isFavorite={isFavorito} />
-                                        </div>
+                                        <FavButton id={parseInt(id)}/>
                                     </div>
                                     <p className="character__description roboto-condensed--700">{data?.results[0].description}</p>
                                 </div>
@@ -74,3 +53,28 @@ export const Character: React.FC = () => {
     )
 
 }
+
+const FavButton: React.FC<{id:number}>= ({id}) =>{
+    const {favorites}=useContext(FavoritesContext);
+    const { changeFavoritos, isOnFavoritos } = useFavoritesContext();
+
+    const isFavorito = useMemo(() => {
+        if (id !== undefined) {
+            return isOnFavoritos(id);
+        } else {
+            return false;
+        }
+    },[id, favorites]);
+
+    const HandleClick=(e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        e.stopPropagation();
+        if(id !== undefined) changeFavoritos(id);
+        e.preventDefault();
+    }
+
+    return (
+        <div className="character__name-favs" onClick={HandleClick}>
+            <FavoriteIcon isFavorite={isFavorito} />
+        </div>
+    )
+};

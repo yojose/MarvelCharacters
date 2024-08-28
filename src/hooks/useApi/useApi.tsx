@@ -83,6 +83,10 @@ const useApi = function useAPI<T>(path: string, options: AxiosRequestConfig = de
             }
         }
         fetchData();
+
+        return () => {
+            
+        }
     }, [options]);
 
     return { data, isloading, error }
