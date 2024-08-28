@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,memo } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import useApi from "../../hooks/useApi/useApi";
 import { optionAxios } from "../../types/comicTypes"
@@ -10,9 +10,9 @@ interface comicProps{
     id:string | undefined;
 }
 
-export const Comic: React.FC<comicProps> = ({id}) => {
-    const path = `/${id}/comic`;
-    const maxcharacters = 50;
+const Comic: React.FC<comicProps> = ({id}) => {
+    const path = `characters/${id}/comics`;
+    const maxcharacters = 10;
     const [optionAxios, setOptionAxios] = useState<optionAxios>({
         method: 'get',
         params: {
@@ -23,9 +23,10 @@ export const Comic: React.FC<comicProps> = ({id}) => {
     const { data, isloading, error } = useApi<ComicsResult[]>(path, optionAxios);
 
     useEffect(() => {
-        console.log(data);
+
     }, [data]);
 
+    console.log("render comic");
     return (
         <>
             {(isloading === false) &&
@@ -54,3 +55,5 @@ export const Comic: React.FC<comicProps> = ({id}) => {
     )
 
 }
+
+export default memo(Comic)

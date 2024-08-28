@@ -4,12 +4,12 @@ import useApi from "../../hooks/useApi/useApi";
 import { optionAxios } from "../../types/charactersTypes"
 import { Data, CharacterResult } from "../../types/apiTypes";
 import '../../styles/character.css';
-import {Comic} from "../../components/Comic/comic";
+import Comic from "../../components/Comic/comic";
 
 
 export const Character: React.FC = () => {
     const { id } = useParams();
-    const path = `/charactaers/${id}`;
+    const path = `/characters/${id}`;
     const maxcharacters = 50;
     const [optionAxios, setOptionAxios] = useState<optionAxios>({
         method: 'get',
@@ -21,9 +21,10 @@ export const Character: React.FC = () => {
     const { data, isloading, error } = useApi<CharacterResult[]>(path, optionAxios);
 
     useEffect(() => {
-        console.log(data);
+
     }, [data]);
 
+    console.log("render character isloading:"+isloading);
     return (
         <>
             {(isloading === false) &&

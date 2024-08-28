@@ -16,11 +16,10 @@ export const CharactersContext = createContext<Data<CharacterResult[]> | undefin
 
 export const Characters: React.FC = () => {
     const [filter, setfilter] = useState<string>("");
-    const [path, setpath] = useState<string>("");
+    const [path, setpath] = useState<string>("/characters");
     const maxcharacters=50;
-    
-    const { globalContext, setGlobalContext } = useGlobalContext();
     const delaySearch = useDelay(filter);
+    const { globalContext, setGlobalContext } = useGlobalContext();
     const [optionAxios, setOptionAxios] = useState<optionAxios>({
         method: 'get',
         params: {
