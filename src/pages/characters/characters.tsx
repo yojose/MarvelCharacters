@@ -1,22 +1,23 @@
-import React, { useState, useEffect, useRef, createContext } from "react";
+import React, { useState, useEffect, createContext, useCallback, memo, useRef } from "react";
 import useApi from "../../hooks/useApi/useApi";
 import { Data, CharacterResult } from "../../types/apiTypes";
 import { CharacterCard } from "../../components/Cards/characterCard"
 import SearchCharacters from "../../components/Search/searchCharacters";
-import { useDelay } from "../../hooks/useDelay";
 import '../../styles/app.css';
 import '../../styles/search.css';
 import { optionAxios } from "../../types/charactersTypes";
 import useFavoritesFilter from "../../hooks/filters/useFavoritesFilter";
 import useCharactersContext from "../../hooks/useContexts/useCharactersContext"
+import { useParams } from "react-router-dom";
 
 export const CharactersContext = createContext<Data<CharacterResult[]> | undefined>(undefined);
 
 export const Characters: React.FC = () => {
-    const [filter, setfilter] = useState<string>("");
-    const [path, setpath] = useState<string>("/characters");
-    const maxcharacters = 5;
-    const delaySearch = useDelay(filter);
+    const path = "/characters";
+    const maxcharacters = 50;
+    const firstRender=useRef(false);
+    const [search, seSearch] = useState<string>("");
+    const { favoritesFilter } = useParams();
     const [optionAxios, setOptionAxios] = useState<optionAxios>({
         method: 'get',
         params: {
@@ -25,51 +26,54 @@ export const Characters: React.FC = () => {
         }
     });
 
-    const { data, isloading, error } = useApi<CharacterResult[]>(path, optionAxios);
-    const { favoriteDataFilter, favoritesDataFiltered, isFavoritesFiltered } = useFavoritesFilter(data);
-
-    /*useEffect(() => {
-        const udpadeCharacters = () => {
-            let newglobalContext:GlovalContextData;
-            if(globalContext!==undefined){
-                newglobalContext={ ...globalContext, ...{ characters: {
-                    results:data?.results} as Data<CharacterResult[]> } };
-            }else{
-                newglobalContext={...{characters:{} as Data<CharacterResult>,favorites: []},...{ characters: {
-                    results:data?.results} as Data<CharacterResult[]> }}
-            }
-            setGlobalContext(newglobalContext);
-        }
-
-        if (data !== undefined) {
-            udpadeCharacters();
-        }
-    }, [data]);*/
-
-    /*useEffect(()=>{
-        if (first.current) {
-            first.current = false;
-            return;
-          }
-        //fetchRequest();
-    },[])*/
-
+    const { data, isloading } = useApi<CharacterResult[]>(path, optionAxios);
+    const { favoritesDataFiltered, isFavoritesFiltered, notFilter } = useFavoritesFilter({data,favoritesFilter});
+    
     useEffect(() => {
-        if (data !== undefined) favoriteDataFilter()
-    }, [data]);
+        if(firstRender.current===false){
+            firstRender.current=true;
+            return
+        }
+        if(isFavoritesFiltered)notFilter();
+        if (search !== "") {
+            setOptionAxios({
+                method: 'get',
+                params: {
+                    limit: maxcharacters,
+                    offset: 0,
+                    nameStartsWith: search,
+                }
+            })
+        } else {
+            setOptionAxios({
+                method: 'get',
+                params: {
+                    limit: 10,
+                    offset: 0,
+                }
+            })
+        }
+    }, [search]);
+    
 
-    console.debug("render Characters")
+    const onChangeSearch = useCallback((value: string) => {
+        seSearch(value);
+    }, []);
+
+    console.debug("render Characters");
 
     return (
         <>
-            <CharactersContext.Provider value={isFavoritesFiltered?favoritesDataFiltered:data}>
-                <div>isloading:{isloading}</div>
-                {(isloading === false && data !== undefined) &&
+            <CharactersContext.Provider value={isFavoritesFiltered ? favoritesDataFiltered : data}>
+                {
                     <section className="section">
-                        <SearchCharacters onChange={setfilter} />
-                        <div className="characters__container">
-                            <CharactersCards/>
-                        </div>
+                        {favoritesFilter !== undefined && <h2 style={{ color: "black" }}>FAVORITES</h2>}
+                        <SearchCharacters onChange={onChangeSearch} disable={(isloading === true && data === undefined)?true:false}/>
+                        {(isloading === false && data !== undefined) &&
+                            <div className="characters__container">
+                                <MemoCharactersCards />
+                            </div>
+                        }
                     </section>
                 }
             </CharactersContext.Provider>
@@ -79,10 +83,11 @@ export const Characters: React.FC = () => {
 
 const CharactersCards = () => {
     const CharactersContext = useCharactersContext();
+    console.log("render CharactersCards")
     return (
         <>
-            {CharactersContext?.map((character) =>
-                <CharacterCard character={character} favorites={[]} key={character.id}>
+            {CharactersContext!==undefined && CharactersContext.results.map((character) =>
+                <CharacterCard character={character} key={character.id}>
                     <CharacterCard.img />
                     <CharacterCard.Title>
                         <CharacterCard.Name />
@@ -92,3 +97,4 @@ const CharactersCards = () => {
         </>
     )
 }
+const MemoCharactersCards =memo(CharactersCards)

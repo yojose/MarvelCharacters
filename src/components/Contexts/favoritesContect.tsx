@@ -7,7 +7,6 @@ const FavoritesContext = createContext<favoritesContextType>({} as favoritesCont
 const  FavoritesContextProvider=({children}:React.PropsWithChildren ) => {
     //const {value,setValue}=useFavoriteContext();
     const [favorites, setFavorites] = useState<favorites>([]);
-    console.debug("render FavoritesContextProvider")
     return (
       <FavoritesContext.Provider value={{favorites, setFavorites}}>
         {children}

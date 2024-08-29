@@ -9,7 +9,6 @@ export default function useFavoritesContext() {
     }
 
     const removeFromFavorites=useCallback((characterId:number)=>{
-        console.debug(Math.floor(Math.random() * 20));
         const favoritesCopy=[...favorites,...[]];
         const index = favoritesCopy.indexOf(characterId);
         favoritesCopy.splice(index, 1);

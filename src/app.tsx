@@ -13,9 +13,7 @@ import { FavoritesContextProvider } from "./components/Contexts/favoritesContect
 function App() {
   return (
     <FavoritesContextProvider>
-      <DefineGlobalContext>
         <RouterProvider router={router} />
-      </DefineGlobalContext>
     </FavoritesContextProvider>
   );
 }

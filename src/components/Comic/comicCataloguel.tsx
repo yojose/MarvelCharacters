@@ -19,13 +19,12 @@ const Comic: React.FC<comicProps> = ({id}) => {
             offset: 0,
         }
     });
-    const { data, isloading, error } = useApi<ComicsResult[]>(path, optionAxios);
+    const { data, isloading } = useApi<ComicsResult[]>(path, optionAxios);
 
     useEffect(() => {
 
     }, [data]);
 
-    console.log("render comic");
     return (
         <>
             {(isloading === false) &&

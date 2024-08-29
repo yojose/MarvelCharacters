@@ -1,23 +1,21 @@
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect, useContext, useCallback } from "react";
 import { Data, CharacterResult } from "../../types/apiTypes";
 import { FavoritesContext } from "../../components/Contexts/favoritesContect";
 
 //const { favoriteDataFilter, isFavoritesFiltered} = useFavoritesFilter(data);
+interface useFavoritesFilterTypes{
+    data: Data<Array<CharacterResult>> | undefined;
+    favoritesFilter: string|undefined
+}
 
-const useFavoritesFilter = function useFavoritesFilter(data: Data<Array<CharacterResult> | undefined>) {
-    const [isFavoritesFiltered, setIsFavoritesFiltered] = useState<boolean>(true);
+const useFavoritesFilter = function useFavoritesFilter({data,favoritesFilter}:useFavoritesFilterTypes) {
+    const [isFavoritesFiltered, setIsFavoritesFiltered] = useState<boolean>(false);
     const [favoritesDataFiltered, setFavoritesDataFiltered] = useState<Data<CharacterResult[]>>();
     const { favorites } = useContext(FavoritesContext);
 
-    useEffect(() => {
-
-    }, [data]);
-
-    const favoriteDataFilter = () => {
+    const favoriteDataFilter = useCallback(() => {
         if (data !== undefined && favorites.length > 0 && data.results!==undefined) {
-            
             const ResultFiltered = data.results?.filter((character) => { return favorites.includes(character.id) });
-
             if (ResultFiltered !== undefined) {
                 setFavoritesDataFiltered({
                     offset: data.offset,
@@ -29,9 +27,21 @@ const useFavoritesFilter = function useFavoritesFilter(data: Data<Array<Characte
                 setIsFavoritesFiltered(true);
             }
         }
-    }
+    },[data,favorites]);
 
-    return { favoriteDataFilter, favoritesDataFiltered, isFavoritesFiltered }
+    const notFilter = useCallback(() => {
+        setIsFavoritesFiltered(false);
+    },[])
+
+    useEffect(() => {
+        if (favoritesFilter === undefined) {
+            notFilter();
+        } else {
+            if (data !== undefined) favoriteDataFilter()
+        }
+    }, [favoritesFilter, data]);
+
+    return { favoritesDataFiltered, isFavoritesFiltered, notFilter }
 }
 
 export default useFavoritesFilter;

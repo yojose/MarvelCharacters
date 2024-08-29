@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { CharacterCardProps, UseCharacterCardContext } from "../../types/charactersTypes";
-import { PropsWithChildren } from 'react';
-import { Link } from "react-router-dom";
 import useCharactersContext from "../../hooks/useContexts/useCharactersContext"
 import '../../styles/search.css';
-import {seachCharacters} from "../../types/searchCharactersTypes"
+import {seachCharacters} from "../../types/searchCharactersTypes";
+import { useDelay } from "../../hooks/useDelay";
 
-const SearchCharacters = ({onChange}:seachCharacters) => {
+const SearchCharacters = ({onChange,disable}:seachCharacters, ) => {
+    const [search, setSearch] = useState('');
+    const delaySearch = useDelay(search);
+
+    useEffect(() => {
+        onChange(delaySearch);
+    }, [delaySearch]);
+
     return (
         <search className="search">
             <div className="search__container">
@@ -14,13 +19,15 @@ const SearchCharacters = ({onChange}:seachCharacters) => {
                     <div className="icon__search"></div>
                     <label className="search__character-label">
                         <input
-                            className="search__input"
+                            className={(search==="")?"search__input":"search__input--active"}
                             type="text"
                             name="search_character"
                             id="search_character"
                             placeholder="SEARCH A CHARACTER"
                             maxLength={200}
-                            onChange={(e) => onChange(e.target.value)} />
+                            value={search}
+                            disabled={disable}
+                            onChange={(e) => setSearch(e.target.value)} />
                     </label>
                 </form>
                 <SearchCharactersResult />

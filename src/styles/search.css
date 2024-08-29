@@ -29,6 +29,7 @@
                 }
     
                 & .search__input--active{
+                    width: 100%;
                     color:var(--text-secondary-color);
                 }
             }

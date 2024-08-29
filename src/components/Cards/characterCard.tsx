@@ -10,9 +10,9 @@ import { FavoriteIcon } from "../../components/favoritesIcon/favoritesIcon"
 
 const CharacterCardContext = createContext<UseCharacterCardContext | undefined>(undefined);
 
-const CharacterCard = ({ children, character, favorites }: CharacterCardProps) => {
+const CharacterCard= ({ children, character }: CharacterCardProps) =>{
     return (
-        <CharacterCardContext.Provider value={{ character, favorites }}>
+        <CharacterCardContext.Provider value={{ character }}>
             <article className="character-card">
                 <div className="character-card__container">
                     {children}
@@ -22,6 +22,7 @@ const CharacterCard = ({ children, character, favorites }: CharacterCardProps) =
     )
 
 }
+
 export {CharacterCard, CharacterCardContext};
 
 
@@ -72,7 +73,7 @@ CharacterCard.FavButton = function facButton() {
 
     const HandleClick=(e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation();
-        if(character.id !== undefined) changeFavoritos(id);
+        if(id !== undefined) changeFavoritos(id);
         e.preventDefault();
     }
 

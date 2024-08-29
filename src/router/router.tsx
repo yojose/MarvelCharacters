@@ -11,9 +11,9 @@ export const router = createBrowserRouter([
       element: <MainPageLayout />,
       errorElement: <ErrorPage />,
       children: [
-        { index: true, element: <Navigate to="/charactersList" replace /> },
+        { index: true, element: <Navigate to="/characters" replace /> },
         {
-          path: "charactersList",
+          path: "characters/:favoritesFilter?",
           element: <Characters />,
         },
         {

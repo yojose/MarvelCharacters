@@ -21,9 +21,7 @@ export const Character: React.FC = () => {
             offset: 0,
         }
     });
-    const { data, isloading, error } = useApi<CharacterResult[]>(path, optionAxios);
-
-    console.log("render character isloading:" + isloading);
+    const { data, isloading } = useApi<CharacterResult[]>(path, optionAxios);
 
     return (
         <>
