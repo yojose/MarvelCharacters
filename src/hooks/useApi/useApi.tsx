@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { publickey, privatekey, baseUrl, charactersLimit } from "../../api/config";
 import { Md5 } from 'ts-md5';
 import { Data } from "../../types/apiTypes";
-import { testDataCharactaersList } from "../../api/testData"
-import { testDataComicList } from "../../api/testDataComic"
+import { AxiosRequestConfig, AxiosResponse } from "axios";
+//import { testDataCharactaersList } from "../../api/testData"
+//import { testDataComicList } from "../../api/testDataComic"
 
 const defaultConfig = {
     method: 'get',
@@ -14,7 +14,7 @@ const defaultConfig = {
     }
 };
 
-const getApiKeyParams = () => {
+/*const getApiKeyParams = () => {
     const ts = new Date().getTime().toString();
     let message = "";
     let hash = "";
@@ -28,7 +28,7 @@ const getApiKeyParams = () => {
     }
 
     return { ts, hash }
-}
+}*/
 
 const useApi = function useAPI<T>(path: string, options: AxiosRequestConfig = defaultConfig){
     const [data, setData] = useState<Data<T>>();
@@ -56,11 +56,6 @@ const useApi = function useAPI<T>(path: string, options: AxiosRequestConfig = de
         }
 
         const optionsAxios = { ...defaultOptionsAxios,...options,...{params:{...defaultOptionsAxios.params,...options.params}}};
-
-        //const url = "https://gateway.marvel.com/v1/public/characters"+"?ts=1724595161654&limit=50&apiKey=996de6600f0fefd5d16ffc8e6a21adfd&hash=bf15456d981d3fed53b273d34a14d3c7&limit=50";
-        //const alternativeUrl = "https://gateway.marvel.com/v1/public/characters?ts=1724595161654&limit=50&apikey=996de6600f0fefd5d16ffc8e6a21adfd&hash=bf15456d981d3fed53b273d34a14d3c7";
-
-        
 
         setIsLoading(true);
 

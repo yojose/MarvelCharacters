@@ -48,7 +48,7 @@ export const Characters: React.FC = () => {
             setOptionAxios({
                 method: 'get',
                 params: {
-                    limit: 10,
+                    limit: maxcharacters,
                     offset: 0,
                 }
             })
