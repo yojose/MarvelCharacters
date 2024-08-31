@@ -1,10 +1,10 @@
 import React from "react";
 import { render, screen, shallow, cleanup, renderHook, act, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event'
-import { Characters } from '../pages/characters/characters';
-import { testDataCharactaersList } from "../api/testData"
-import useApi from '../hooks/useApi/useApi';
-import useFavoritesFilter from "../hooks/filters/useFavoritesFilter";
+import { Characters } from '../../pages/characters/characters';
+import { testDataCharactaersList } from "../../api/testData"
+import useApi from '../../hooks/useApi/useApi';
+import useFavoritesFilter from "../../hooks/filters/useFavoritesFilter";
 import { BrowserRouter } from "react-router-dom"
 
 
@@ -24,12 +24,12 @@ const charactersBrowser = () => {
     )
 }
 
-jest.mock('../hooks/useApi/useApi', () => ({
+jest.mock('../../hooks/useApi/useApi', () => ({
     __esModule: true,
     default: jest.fn()
 }));
 
-jest.mock('../hooks/filters/useFavoritesFilter', () => ({
+jest.mock('../../hooks/filters/useFavoritesFilter', () => ({
     __esModule: true,
     default: jest.fn()
 }));
@@ -53,8 +53,6 @@ describe('Characters', () => {
             const searchInput = screen.getByTestId('searchInput');
             act(() => userEvent.type(searchInput, 'Man'));
             expect(screen.queryByTestId('characters')).toBeInTheDocument();
-
-            screen.debug(screen.getByTestId("search"));
         });
     })
     describe('Character not render', () => {

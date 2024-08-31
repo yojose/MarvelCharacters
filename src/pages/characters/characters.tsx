@@ -61,8 +61,6 @@ export const Characters: React.FC = () => {
         seSearch(value);
     }, []);
 
-    console.debug("render Characters");
-
     return (
         <>
             <CharactersContext.Provider value={isFavoritesFiltered ? favoritesDataFiltered : data}>
@@ -87,7 +85,6 @@ export const Characters: React.FC = () => {
 
 const CharactersCards = () => {
     const CharactersContext = useCharactersContext();
-    console.log("render CharactersCards")
     return (
         <>
             {CharactersContext !== undefined && CharactersContext.results.map((character) =>

@@ -1,15 +1,15 @@
 
 import React from "react";
-import { render, screen, cleanup, renderHook, act } from '@testing-library/react';
-import useApi from '../hooks/useApi/useApi';
-import { Character } from '../pages/character/character';
-import { testDataCharacter } from "../api/testDataCharacter";
+import { render, screen} from '@testing-library/react';
+import useApi from '../../hooks/useApi/useApi';
+import { Character } from '../../pages/character/character';
+import { testDataCharacter } from "../../api/testDataCharacter";
 import Router from 'react-router';
 
 const mockDataLoadReturn = { data: testDataCharacter.data, isloading: false, error: "" };
 const mockDataUnloadReturn = { data: undefined, isloading: true, error: "" };
 
-jest.mock('../hooks/useApi/useApi', () => ({
+jest.mock('../../hooks/useApi/useApi', () => ({
     __esModule: true,
     default: jest.fn()
 }));
@@ -28,7 +28,6 @@ describe('Character', () => {
             useApi.mockImplementation(() => mockDataLoadReturn);
 
             render(<Character />);
-            screen.debug(undefined, 300000);
             expect(screen.queryByTestId('character__img')).toBeInTheDocument();
         });
     })
@@ -39,7 +38,6 @@ describe('Character', () => {
             useApi.mockImplementation(() => mockDataLoadReturn);
 
             render(<Character />);
-            screen.debug(undefined, 300000);
             expect(screen.queryByTestId('character__img')).not.toBeInTheDocument();
         })
 
@@ -50,7 +48,6 @@ describe('Character', () => {
             useApi.mockImplementation(() => mockDataLoadIsloadigTrueReturn);
 
             render(<Character />);
-            screen.debug(undefined, 300000);
             expect(screen.queryByTestId('character__img')).not.toBeInTheDocument();
         })
 
@@ -59,7 +56,6 @@ describe('Character', () => {
             useApi.mockImplementation(() => mockDataUnloadReturn);
 
             render(<Character />);
-            screen.debug(undefined, 300000);
             expect(screen.queryByTestId('character__img')).not.toBeInTheDocument();
         })
 
@@ -68,7 +64,6 @@ describe('Character', () => {
             useApi.mockImplementation(() => mockDataUnloadReturn);
 
             render(<Character />);
-            screen.debug(undefined, 300000);
             expect(screen.queryByTestId('character__img')).not.toBeInTheDocument();
         })
     })
