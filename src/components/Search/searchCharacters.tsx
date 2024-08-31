@@ -13,7 +13,7 @@ const SearchCharacters = ({onChange,disable}:seachCharacters, ) => {
     }, [delaySearch]);
 
     return (
-        <search className="search">
+        <div className="search" data-testid="search">
             <div className="search__container">
                 <form action="#" method="get" className="search__form">
                     <div className="icon__search"></div>
@@ -27,12 +27,13 @@ const SearchCharacters = ({onChange,disable}:seachCharacters, ) => {
                             maxLength={200}
                             value={search}
                             disabled={disable}
-                            onChange={(e) => setSearch(e.target.value)} />
+                            onChange={(e) => setSearch(e.target.value)}
+                            data-testid="searchInput" />
                     </label>
                 </form>
                 <SearchCharactersResult />
             </div>
-        </search>
+        </div>
 
     )
 }

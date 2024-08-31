@@ -17,7 +17,7 @@ export const Characters: React.FC = () => {
     const path = "/characters";
     const maxcharacters = 50;
     const firstRender = useRef(false);
-    const [search, seSearch] = useState<string>("");
+    const [search, seSearch] = React.useState<string>("");
     const { favoritesFilter } = useParams();
     const [optionAxios, setOptionAxios] = useState<optionAxios>({
         method: 'get',

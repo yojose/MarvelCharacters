@@ -1,10 +1,11 @@
 import React from "react";
-import { render, screen, shallow, cleanup, renderHook, act } from '@testing-library/react';
+import { render, screen, shallow, cleanup, renderHook, act, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event'
 import { Characters } from '../pages/characters/characters';
 import { testDataCharactaersList } from "../api/testData"
 import useApi from '../hooks/useApi/useApi';
 import useFavoritesFilter from "../hooks/filters/useFavoritesFilter";
-import Router from 'react-router';
+import { BrowserRouter } from "react-router-dom"
 
 
 //useApi
@@ -13,7 +14,15 @@ import Router from 'react-router';
 
 const mockDataLoadReturn = { data: testDataCharactaersList.data, isloading: false, error: "" };
 const mockDataUnloadReturn = { data: undefined, isloading: true, error: "" };
-const favoritesUse={ favoritesDataFiltered:testDataCharactaersList.data, isFavoritesFiltered:true, notFilter:jest.fn(()=>{}) }
+const favoritesUse = { favoritesDataFiltered: testDataCharactaersList.data, isFavoritesFiltered: true, notFilter: jest.fn(() => { }) }
+
+const charactersBrowser = () => {
+    return (
+        <BrowserRouter>
+            <Characters />
+        </BrowserRouter>
+    )
+}
 
 jest.mock('../hooks/useApi/useApi', () => ({
     __esModule: true,
@@ -31,24 +40,23 @@ describe('Characters', () => {
             useApi.mockImplementation(() => mockDataLoadReturn);
             useFavoritesFilter.mockImplementation(() => favoritesUse);
 
-            shallow(<Characters />);
-            screen.debug(undefined, 300000);
+            render(charactersBrowser());
+            
             expect(screen.queryByTestId('characters')).toBeInTheDocument();
         });
-        test("Characters data CharacterResult[] search render the characters list", async () => {
-            // const setState = jest.fn();
-            // jest
-            //     .spyOn(React, 'useState')
-            //     .mockImplementationOnce(initState => [initState, setState]);
-            // useApi.mockImplementation(() => mockDataLoadReturn);
+        test("Characters search render the characters list", async () => {
             useApi.mockImplementation(() => mockDataLoadReturn);
             useFavoritesFilter.mockImplementation(() => favoritesUse);
-            shallow(<Characters />);
-            screen.debug(undefined, 300000);
-            expect(screen.queryByTestId('character__img')).toBeInTheDocument();
+
+            render(charactersBrowser());
+
+            const searchInput = screen.getByTestId('searchInput');
+            act(() => userEvent.type(searchInput, 'Man'));
+            expect(screen.queryByTestId('characters')).toBeInTheDocument();
+
+            screen.debug(screen.getByTestId("search"));
         });
     })
-
     describe('Character not render', () => {
         test("Character data CharacterResult[] isloading true not render the characters list", async () => {
             const mockDataLoadIsloadigTrueReturn = { ...mockDataLoadReturn, ...{ isLoading: true } };
@@ -56,8 +64,7 @@ describe('Characters', () => {
             useApi.mockImplementation(() => mockDataLoadIsloadigTrueReturn);
             useFavoritesFilter.mockImplementation(() => favoritesUse);
 
-            shallow(<Characters />);
-            screen.debug(undefined, 300000);
+            render(charactersBrowser());
             expect(screen.queryByTestId('character__img')).not.toBeInTheDocument();
         })
 
@@ -65,8 +72,7 @@ describe('Characters', () => {
             useApi.mockImplementation(() => mockDataUnloadReturn);
             useFavoritesFilter.mockImplementation(() => favoritesUse);
 
-            shallow(<Characters />);
-            screen.debug(undefined, 300000);
+            render(charactersBrowser());
             expect(screen.queryByTestId('character__img')).not.toBeInTheDocument();
         })
 
@@ -74,8 +80,7 @@ describe('Characters', () => {
             useApi.mockImplementation(() => mockDataUnloadReturn);
             useFavoritesFilter.mockImplementation(() => favoritesUse);
 
-            shallow(<Characters />);
-            screen.debug(undefined, 300000);
+            render(charactersBrowser());
             expect(screen.queryByTestId('character__img')).not.toBeInTheDocument();
         })
     })
