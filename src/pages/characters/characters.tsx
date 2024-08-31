@@ -9,13 +9,14 @@ import { optionAxios } from "../../types/charactersTypes";
 import useFavoritesFilter from "../../hooks/filters/useFavoritesFilter";
 import useCharactersContext from "../../hooks/useContexts/useCharactersContext"
 import { useParams } from "react-router-dom";
+import {Loader} from "../../components/loader/loader"
 
 export const CharactersContext = createContext<Data<CharacterResult[]> | undefined>(undefined);
 
 export const Characters: React.FC = () => {
     const path = "/characters";
     const maxcharacters = 50;
-    const firstRender=useRef(false);
+    const firstRender = useRef(false);
     const [search, seSearch] = useState<string>("");
     const { favoritesFilter } = useParams();
     const [optionAxios, setOptionAxios] = useState<optionAxios>({
@@ -27,14 +28,14 @@ export const Characters: React.FC = () => {
     });
 
     const { data, isloading } = useApi<CharacterResult[]>(path, optionAxios);
-    const { favoritesDataFiltered, isFavoritesFiltered, notFilter } = useFavoritesFilter({data,favoritesFilter});
-    
+    const { favoritesDataFiltered, isFavoritesFiltered, notFilter } = useFavoritesFilter({ data, favoritesFilter });
+
     useEffect(() => {
-        if(firstRender.current===false){
-            firstRender.current=true;
+        if (firstRender.current === false) {
+            firstRender.current = true;
             return
         }
-        if(isFavoritesFiltered)notFilter();
+        if (isFavoritesFiltered) notFilter();
         if (search !== "") {
             setOptionAxios({
                 method: 'get',
@@ -54,7 +55,7 @@ export const Characters: React.FC = () => {
             })
         }
     }, [search]);
-    
+
 
     const onChangeSearch = useCallback((value: string) => {
         seSearch(value);
@@ -66,15 +67,18 @@ export const Characters: React.FC = () => {
         <>
             <CharactersContext.Provider value={isFavoritesFiltered ? favoritesDataFiltered : data}>
                 {
-                    <section className="section">
-                        {favoritesFilter !== undefined && <h2 style={{ color: "black" }}>FAVORITES</h2>}
-                        <SearchCharacters onChange={onChangeSearch} disable={(isloading === true && data === undefined)?true:false}/>
-                        {(isloading === false && data !== undefined) &&
-                            <div className="characters__container">
-                                <MemoCharactersCards />
-                            </div>
-                        }
-                    </section>
+                    <>
+                        {isloading === true && <Loader/>}
+                        <section className="section" >
+                            {favoritesFilter !== undefined && <h2 style={{ color: "black" }}>FAVORITES</h2>}
+                            {(isloading === false && data !== undefined) &&
+                                <div className="characters__container" data-testid="characters">
+                                    <SearchCharacters onChange={onChangeSearch} disable={false} />
+                                    <MemoCharactersCards />
+                                </div>
+                            }
+                        </section>
+                    </>
                 }
             </CharactersContext.Provider>
         </>
@@ -86,7 +90,7 @@ const CharactersCards = () => {
     console.log("render CharactersCards")
     return (
         <>
-            {CharactersContext!==undefined && CharactersContext.results.map((character) =>
+            {CharactersContext !== undefined && CharactersContext.results.map((character) =>
                 <CharacterCard character={character} key={character.id}>
                     <CharacterCard.img />
                     <CharacterCard.Title>
@@ -97,4 +101,4 @@ const CharactersCards = () => {
         </>
     )
 }
-const MemoCharactersCards =memo(CharactersCards)
+const MemoCharactersCards = memo(CharactersCards)

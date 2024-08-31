@@ -2,7 +2,7 @@
     background-color: var(--secondary-color);
     height: 84px;
     width: 100%;
-    border-bottom: 4px solid var(--primary-color);
+    border-bottom: 1px solid var(--grey-70);
     box-sizing: border-box;
 
     & .header__container {

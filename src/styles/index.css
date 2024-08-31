@@ -1,9 +1,9 @@
 :root {
-  /*--primary-color: #ec1d24;*/
   --secondary-color: black;
   --text-primary-color: white;
   --text-secondary-color: black;
   --text-tertiary-color: rgb(142, 142, 142);
+  --grey-70:#333;
 }
 
 @property --primary-color {

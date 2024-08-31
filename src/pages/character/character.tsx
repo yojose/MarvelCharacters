@@ -7,7 +7,8 @@ import '../../styles/character.css';
 import Comic from "../../components/Comic/comicCataloguel";
 import { FavoritesContext } from "../../components/Contexts/favoritesContect"
 import useFavoritesContext from "../../hooks/useContexts/useFavoritesContext";
-import { FavoriteIcon } from "../../components/favoritesIcon/favoritesIcon"
+import { FavoriteIcon } from "../../components/favoritesIcon/favoritesIcon";
+import {Loader} from "../../components/loader/loader"
 
 
 export const Character: React.FC = () => {
@@ -25,7 +26,7 @@ export const Character: React.FC = () => {
 
     return (
         <>
-            <div>esto es solo para ver si se renderiza. data{data?.count} isloading: {isloading.toString()} condicion:{(isloading === false && id !== undefined && data !== undefined).toString()}</div>
+            {isloading === true && <Loader/>}
             {(isloading === false && id !== undefined && data !== undefined) &&
                 <section className="section--no-pading">
                     <article className="character__container">
