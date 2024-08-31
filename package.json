@@ -38,6 +38,12 @@
       "last 1 safari version"
     ]
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less|scss|sass)$": "identity-obj-proxy",
+      "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/__mocks__/fileMock.js"
+    }
+  },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
     "@testing-library/react": "^16.0.0",

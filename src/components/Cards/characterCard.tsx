@@ -1,21 +1,23 @@
 import React, { createContext, useContext, useMemo } from "react";
 import { CharacterCardProps, UseCharacterCardContext } from "../../types/charactersTypes";
 import { PropsWithChildren } from 'react';
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import useCharacterCardContext from "../../hooks/useCharacters/useCharacterCardContext"
 import '../../styles/characters.css';
-import {FavoritesContext} from "../../components/Contexts/favoritesContect";
+import { FavoritesContext } from "../../components/Contexts/favoritesContect";
 import useFavoritesContext from "../../hooks/useContexts/useFavoritesContext";
 import { FavoriteIcon } from "../../components/favoritesIcon/favoritesIcon"
 
 const CharacterCardContext = createContext<UseCharacterCardContext | undefined>(undefined);
 
-const CharacterCard= ({ children, character }: CharacterCardProps) =>{
+const CharacterCard = ({ children, character }: CharacterCardProps) => {
     return (
         <CharacterCardContext.Provider value={{ character }}>
             <article className="character-card">
-                <div className="character-card__container">
-                    {children}
+                <div className="character-card-border">
+                    <div className="character-card__container">
+                        {children}
+                    </div>
                 </div>
             </article>
         </CharacterCardContext.Provider>
@@ -23,7 +25,7 @@ const CharacterCard= ({ children, character }: CharacterCardProps) =>{
 
 }
 
-export {CharacterCard, CharacterCardContext};
+export { CharacterCard, CharacterCardContext };
 
 
 
@@ -58,10 +60,10 @@ CharacterCard.Name = function name() {
 };
 
 CharacterCard.FavButton = function facButton() {
-    const { character} = useCharacterCardContext();
-    const {favorites}=useContext(FavoritesContext);
+    const { character } = useCharacterCardContext();
+    const { favorites } = useContext(FavoritesContext);
     const { changeFavoritos, isOnFavoritos } = useFavoritesContext();
-    const id=character.id;
+    const id = character.id;
 
     const isFavorito = useMemo(() => {
         if (id !== undefined) {
@@ -69,11 +71,11 @@ CharacterCard.FavButton = function facButton() {
         } else {
             return false;
         }
-    },[id, favorites]);
+    }, [id, favorites]);
 
-    const HandleClick=(e:React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    const HandleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation();
-        if(id !== undefined) changeFavoritos(id);
+        if (id !== undefined) changeFavoritos(id);
         e.preventDefault();
     }
 

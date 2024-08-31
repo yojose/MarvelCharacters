@@ -1,41 +1,20 @@
 
 import React from "react";
-import { render, screen, renderHook, act } from '@testing-library/react';
-import useApi from '../hooks/useApi/useApi';
-import {Character} from '../pages/character/character';
-import { testDataCharactaersList } from "../api/testData";
+import { render, screen } from '@testing-library/react';
+import { Favorites } from '../pages/favorites/favorites';
+import { MainPageLayout } from "../pages/layout/mainPageLayout"
+import { BrowserRouter } from 'react-router-dom'
 
-/*
-path: string, options: AxiosRequestConfig = defaultConfig
 
-return data, isloading, error 
-*/
+test("Favorites", async () => {
+    render(<Favorites />)
+    expect(screen.getByText(/test/i)).toBeInTheDocument()
 
-jest.mock('../hooks/useApi/useApi');
+});
 
-const getCharacterArgs = {
-    path: "/characters",
-    optionAxios: {
-        method: 'get',
-        params: {
-            limit: 50,
-            offset: 0,
-        }
-    }
-}
-
-const mockUaeApi = {
-    data: testDataCharactaersList,
-    isloading: false,
-    error: ""
-};
-
-describe('useApi', () => {
-    
-    test("Character test render article", async () => {
-        render(<Character />)
-        expect(screen.getByText(/article/i)).toBeInTheDocument()
-        
-      });
-
-})
+// test("MainPageLayout", async () => {
+//     render(
+//     <BrowserRouter>
+//         <MainPageLayout />
+//     </BrowserRouter>)
+// });

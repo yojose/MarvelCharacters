@@ -5,6 +5,7 @@ export default function useFavoritesContext() {
     const {favorites, setFavorites} = useContext(FavoritesContext);
 
     const isOnFavoritos=(characterId:number)=>{
+        if(favorites===undefined)return false
         return favorites.includes(characterId);
     }
 
