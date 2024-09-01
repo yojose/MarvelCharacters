@@ -11,21 +11,25 @@ const mockDataUnloadReturn = { data: undefined, isloading: true, error: "" };
 
 jest.mock('../../hooks/useApi/useApi', () => ({
     __esModule: true,
-    default: jest.fn()
+    default: jest.fn(() => 42)
 }));
 
 jest.mock('react-router', () => ({
     ...jest.requireActual('react-router'),
     useParams: jest.fn(),
 }));
+const mockUseApi=useApi as jest.Mock;
+
 
 describe('Character', () => {
     //afterEach(cleanup)
 
     describe('Character render', () => {
         test("Character data CharacterResult[] render the character", async () => {
+
+            
             jest.spyOn(Router, 'useParams').mockReturnValue({ id: '1017100' });
-            useApi.mockImplementation(() => mockDataLoadReturn);
+            mockUseApi.mockImplementation(() => mockDataLoadReturn);
 
             render(<Character />);
             expect(screen.queryByTestId('character__img')).toBeInTheDocument();
@@ -35,7 +39,7 @@ describe('Character', () => {
     describe('Character not render', () => {
         test("Character data CharacterResult[] no id not render the character", async () => {
             jest.spyOn(Router, 'useParams').mockReturnValue({ id: undefined });
-            useApi.mockImplementation(() => mockDataLoadReturn);
+            mockUseApi.mockImplementation(() => mockDataLoadReturn);
 
             render(<Character />);
             expect(screen.queryByTestId('character__img')).not.toBeInTheDocument();
@@ -45,7 +49,7 @@ describe('Character', () => {
             const mockDataLoadIsloadigTrueReturn = { ...mockDataLoadReturn, ...{ isLoading: true } };
 
             jest.spyOn(Router, 'useParams').mockReturnValue({ id: undefined });
-            useApi.mockImplementation(() => mockDataLoadIsloadigTrueReturn);
+            mockUseApi.mockImplementation(() => mockDataLoadIsloadigTrueReturn);
 
             render(<Character />);
             expect(screen.queryByTestId('character__img')).not.toBeInTheDocument();
@@ -53,7 +57,7 @@ describe('Character', () => {
 
         test("Character data undefined render not render the character ", async () => {
             jest.spyOn(Router, 'useParams').mockReturnValue({ id: '1017100' });
-            useApi.mockImplementation(() => mockDataUnloadReturn);
+            mockUseApi.mockImplementation(() => mockDataUnloadReturn);
 
             render(<Character />);
             expect(screen.queryByTestId('character__img')).not.toBeInTheDocument();
@@ -61,7 +65,7 @@ describe('Character', () => {
 
         test("Character data undefined and id undefined render not render the character ", async () => {
             jest.spyOn(Router, 'useParams').mockReturnValue({ id: undefined });
-            useApi.mockImplementation(() => mockDataUnloadReturn);
+            mockUseApi.mockImplementation(() => mockDataUnloadReturn);
 
             render(<Character />);
             expect(screen.queryByTestId('character__img')).not.toBeInTheDocument();

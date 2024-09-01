@@ -1,10 +1,7 @@
 import { useState, useEffect, useRef } from "react";
-import { publickey, privatekey, baseUrl, charactersLimit } from "../../api/config";
-import { Md5 } from 'ts-md5';
+import { baseUrl, charactersLimit } from "../../configs/config";
 import { Data } from "../../types/apiTypes";
 import axios,{ AxiosRequestConfig, AxiosResponse } from "axios";
-//import { testDataCharactaersList } from "../../api/testData"
-//import { testDataComicList } from "../../api/testDataComic"
 
 const defaultConfig = {
     method: 'get',

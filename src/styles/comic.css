@@ -32,15 +32,15 @@
 }
 
 
-.comic{
+.comic-card{
     width:179.2px;
     height:340.8px;
 }
-.comic__container{
+.comic-card__container{
     width: 100%;
 }
 
-.comic__img{
+.comic-card__img{
     width: 179.2px;
     height: 268.8px;
     > img{
@@ -48,11 +48,11 @@
         height: 268.8px;
     }
 }
-.comic__information{
+.comic-card__information{
     width: calc(100% - 10px);
     padding: 0 5px;
 }
-.comic__name{
+.comic-card__name{
     width: 179.2px;
     height: 38px;
     padding: 5px 0;
@@ -60,7 +60,7 @@
     font-size: 16px;
     overflow: hidden;
 }
-.comic__year{
+.comic-card__year{
     width: 179.2px;
     height: 14px;
     font-size: 12px;

@@ -1,4 +1,4 @@
-import React, { useState, useEffect,memo } from "react";
+import React, { useState,memo } from "react";
 import useApi from "../../hooks/useApi/useApi";
 import { optionAxios } from "../../types/comicTypes"
 import '../../styles/comic.css';
@@ -21,14 +21,11 @@ const Comic: React.FC<comicProps> = ({id}) => {
     });
     const { data, isloading } = useApi<ComicsResult[]>(path, optionAxios);
 
-    useEffect(() => {
-
-    }, [data]);
-
     return (
         <>
             {(isloading === false) &&
-                <section className="comics">
+                <section className="comics" data-testid="comic-section">
+
                 <div className="comics__container text--secondary-color">
                     <h2>
                         COMICS

@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 import {CharacterResult} from "./apiTypes";
 
 export interface CharacterCardProps extends PropsWithChildren {
-    character: CharacterResult;
+    character: CharacterResult | undefined;
 };
 
 export interface UseCharacterCardContext {

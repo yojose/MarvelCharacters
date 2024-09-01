@@ -2,7 +2,7 @@ import { PropsWithChildren } from 'react';
 import {ComicsResult} from "./apiTypes";
 
 export interface ComicCardProps extends PropsWithChildren {
-    comic: ComicsResult;
+    comic: ComicsResult | undefined;
 };
 
 export interface UseComicCardContext {

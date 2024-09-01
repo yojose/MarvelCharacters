@@ -4,7 +4,7 @@ import useApi from "../../hooks/useApi/useApi";
 import { optionAxios } from "../../types/charactersTypes"
 import { CharacterResult } from "../../types/apiTypes";
 import '../../styles/character.css';
-import Comic from "../../components/Comic/comicCataloguel";
+import Comic from "../../components/Comic/comicCatalog";
 import { FavoritesContext } from "../../components/Contexts/favoritesContect"
 import useFavoritesContext from "../../hooks/useContexts/useFavoritesContext";
 import { FavoriteIcon } from "../../components/favoritesIcon/favoritesIcon";

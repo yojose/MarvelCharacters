@@ -7,15 +7,18 @@ import '../../styles/characters.css';
 
 const ComicCardContext = createContext<UseComicCardContext | undefined>(undefined);
 
-const ComicCard = ({ children, comic}: ComicCardProps) => {
+const ComicCard = ({ children, comic }: ComicCardProps) => {
     return (
-        <ComicCardContext.Provider value={{ comic }}>
-            <article className="comic">
-                <div className="comic__container">
-                    {children}
-                </div>
-            </article>
-        </ComicCardContext.Provider>
+        <>{(comic !== undefined) &&
+            <ComicCardContext.Provider value={{ comic }}>
+                <article className="comic-card" data-testid="comic-card">
+                    <div className="comic-card__container">
+                        {children}
+                    </div>
+                </article>
+            </ComicCardContext.Provider>
+        }
+        </>
     )
 
 }
@@ -34,7 +37,7 @@ ComicCard.Link = function link({ children }: PropsWithChildren) {
 ComicCard.img = () => {
     const { comic } = useComicCardContext();
     return (
-        <div className="comic__img">
+        <div className="comic-card__img">
             <img loading="lazy" src={`${comic.thumbnail.path}/portrait_fantastic.${comic.thumbnail.extension}`} alt={`${comic.title} image}`} />
         </div>
     )
@@ -42,7 +45,7 @@ ComicCard.img = () => {
 
 ComicCard.Title = function title({ children }: PropsWithChildren) {
     return (
-        <div className="comic__information text--secondary-color">
+        <div className="comic-card__information text--secondary-color">
             {children}
         </div>
     )
@@ -52,7 +55,7 @@ ComicCard.Name = function name() {
     const { comic } = useComicCardContext();
 
     return (
-        <div className="comic__name --text-secondary-color roboto-condensed--500">
+        <div className="comic-card__name --text-secondary-color roboto-condensed--500">
             {comic.title}
         </div>
     )
@@ -61,10 +64,15 @@ ComicCard.Name = function name() {
 ComicCard.Year = function year() {
     const { comic } = useComicCardContext();
     return (
-        <div className="comic__year roboto-condensed--600">
-            {comic.dates?.map((d)=> {if(d.type=="onsaleDate"){
-                const date1 = new Date(d.date);
-                return date1.getFullYear()}})}
-        </div>
+        <>{comic !== undefined &&
+            <div className="comic-card__year roboto-condensed--600">
+                {comic.dates?.map((d) => {
+                    if (d.type == "onsaleDate") {
+                        const date1 = new Date(d.date);
+                        return date1.getFullYear()
+                    }
+                })}
+            </div>
+        }</>
     )
 };
