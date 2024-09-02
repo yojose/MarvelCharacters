@@ -37,7 +37,7 @@ ComicCard.Link = function LinkToComic({ children }: PropsWithChildren) {
     )
 }
 
-ComicCard.img = function Imagen() {
+ComicCard.Imagen = function Imagen() {
     const { comic } = useComicCardContext()
     return (
         <div className="comic-card__img">
@@ -76,7 +76,7 @@ ComicCard.Year = function ComicYear() {
                 <div className="comic-card__year roboto-condensed--600">
                     {comic.dates !== undefined &&
                         comic.dates.map((d) => {
-                            if (d.type == 'onsaleDate') {
+                            if (d.type === 'onsaleDate') {
                                 const date1 = new Date(d.date)
                                 return date1.getFullYear()
                             }

@@ -1,10 +1,9 @@
-import React, { useContext, useMemo, useRef } from 'react'
+import React, {useMemo, useRef } from 'react'
 import { useParams } from 'react-router-dom'
 import useApi from '../../hooks/useApi/useApi'
 import { CharacterResult } from '../../types/apiTypes'
 import '../../styles/character.css'
 import Comic from '../../components/Comic/comicCatalog'
-import { FavoritesContext } from '../../components/Contexts/favoritesContect'
 import useFavoritesContext from '../../hooks/useContexts/useFavoritesContext'
 import { FavoriteIcon } from '../../components/ShowfavoritesIcon/favoritesIcon'
 import { Loader } from '../../components/Loader/loader'
@@ -67,7 +66,7 @@ export const Character: React.FC = () => {
 }
 
 const FavButton: React.FC<{ id: number }> = ({ id }) => {
-    const { favorites } = useContext(FavoritesContext)
+    //const { favorites } = useContext(FavoritesContext)
     const { changeFavoritos, isOnFavoritos } = useFavoritesContext()
 
     const isFavorito = useMemo(() => {
@@ -76,7 +75,7 @@ const FavButton: React.FC<{ id: number }> = ({ id }) => {
         } else {
             return false
         }
-    }, [id, favorites])
+    }, [id,isOnFavoritos])
 
     const HandleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation()

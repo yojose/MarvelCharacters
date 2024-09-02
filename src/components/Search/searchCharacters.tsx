@@ -7,9 +7,10 @@ import { useDelay } from '../../hooks/useDelay'
 const SearchCharacters = ({ onChange, disable }: seachCharacters) => {
     const [search, setSearch] = useState('')
     const delaySearch = useDelay(search)
-
+    
     useEffect(() => {
         onChange(delaySearch)
+        // eslint-disable-next-line
     }, [delaySearch])
 
     return (

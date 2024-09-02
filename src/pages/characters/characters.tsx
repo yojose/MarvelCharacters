@@ -64,7 +64,7 @@ export const Characters: React.FC = () => {
                 },
             })
         }
-    }, [search])
+    }, [search,isFavoritesFiltered,notFilter])
 
     const onChangeSearch = useCallback((value: string) => {
         setSearch(value)

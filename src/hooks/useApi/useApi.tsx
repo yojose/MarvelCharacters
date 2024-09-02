@@ -21,12 +21,9 @@ const useApi = function useAPI<T>(
     const abortControllerRef = useRef<AbortController | null>(null)
 
     useEffect(() => {
-        //const apiKeyParam: { ts: string, hash: string } = getApiKeyParams();
 
         abortControllerRef.current?.abort()
         abortControllerRef.current = new AbortController()
-
-        //const optionsAxios = { ...options,...{ baseURL: baseUrl,signal: abortControllerRef.current?.signal } };
 
         const defaultOptionsAxios = {
             method: 'get',
@@ -54,12 +51,6 @@ const useApi = function useAPI<T>(
                     optionsAxios
                 )
                 setData(response.data.data)
-
-                /*if("comic"!==(path.split("/").slice(-1).toString())){
-                    setData(testDataCharactaersList.data as Data<T>)
-                }else{
-                    setData(testDataComicList.data as Data<T>)
-                }*/
                 setIsLoading(false)
             } catch (error) {
                 console.log(error)
@@ -74,7 +65,7 @@ const useApi = function useAPI<T>(
         return () => {
             //abortControllerRef.current?.abort();
         }
-    }, [options])
+    }, [options,path])
 
     return { data, isloading, error }
 }

@@ -17,7 +17,6 @@ const useFavoritesFilter = function useFavoritesFilter({
     const [favoritesDataFiltered, setFavoritesDataFiltered] =
         useState<Data<CharacterResult[]>>()
     const { favorites } = useContext(FavoritesContext)
-
     const favoriteDataFilter = useCallback(() => {
         if (
             data !== undefined &&
@@ -38,6 +37,7 @@ const useFavoritesFilter = function useFavoritesFilter({
                 setIsFavoritesFiltered(true)
             }
         }
+    // eslint-disable-next-line
     }, [data, favorites])
 
     const notFilter = useCallback(() => {
@@ -50,6 +50,7 @@ const useFavoritesFilter = function useFavoritesFilter({
         } else {
             if (data !== undefined) favoriteDataFilter()
         }
+    // eslint-disable-next-line
     }, [favoritesFilter, data])
 
     return { favoritesDataFiltered, isFavoritesFiltered, notFilter }

@@ -33,7 +33,7 @@ const Comic: React.FC<comicProps> = ({ id }) => {
                             <div className="comics__scroll">
                                 {data?.results.map((comic) => (
                                     <ComicCard comic={comic} key={comic.id}>
-                                        <ComicCard.img />
+                                        <ComicCard.Imagen />
                                         <ComicCard.Title>
                                             <ComicCard.Name />
                                             <ComicCard.Year />
