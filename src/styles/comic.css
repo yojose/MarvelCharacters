@@ -1,28 +1,31 @@
-.comics{
+.comics {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
-.comics__container{
+
+.comics__container {
     width: 960px;
     min-height: 340px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 
-    > h2{
+    >h2 {
         width: 960px;
-        font-size: 32px;
+        font-size: 24px;
     }
 }
-.comics__catalog{
+
+.comics__catalog {
     width: 960px;
     min-height: 340px;
     overflow-x: scroll;
 }
-.comics__scroll{
+
+.comics__scroll {
     width: fit-content;
     min-height: 340px;
     display: flex;
@@ -32,27 +35,31 @@
 }
 
 
-.comic-card{
-    width:179.2px;
-    height:340.8px;
+.comic-card {
+    width: 179.2px;
+    height: 340.8px;
 }
-.comic-card__container{
+
+.comic-card__container {
     width: 100%;
 }
 
-.comic-card__img{
+.comic-card__img {
     width: 179.2px;
     height: 268.8px;
-    > img{
+
+    >img {
         width: 179.2px;
         height: 268.8px;
     }
 }
-.comic-card__information{
+
+.comic-card__information {
     width: calc(100% - 10px);
     padding: 0 5px;
 }
-.comic-card__name{
+
+.comic-card__name {
     width: 179.2px;
     height: 38px;
     padding: 5px 0;
@@ -60,8 +67,44 @@
     font-size: 16px;
     overflow: hidden;
 }
-.comic-card__year{
+
+.comic-card__year {
     width: 179.2px;
     height: 14px;
     font-size: 12px;
+}
+
+@media (width <=450px) {
+    .comics__container {
+        width: 100%;
+        min-height: 320px;
+        min-height: 340px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        >h2 {
+            width: calc(100% - 20px);
+            min-height: 60px;
+            font-size: 24px;
+            padding-left: 20px;
+        }
+    }
+
+    .comics__catalog {
+        width: 100%;
+        min-height: 320px;
+        min-height: 340px;
+    }
+
+    .comics__scroll {
+        width: 100%;
+        min-height: 340px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 16px;
+        justify-content: center;
+    }
 }

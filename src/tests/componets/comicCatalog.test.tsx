@@ -17,20 +17,18 @@ const mockUseApi = useApi as jest.Mock;
 describe('comic catalog render', () => {
     test("Comic data CharacterResult[] render the list of comic", async () => {
         mockUseApi.mockImplementation(() => mockDataLoadReturn);
-        screen.debug(undefined,300000)
         render(<Comic id={"1017100"}/>);
         expect(screen.queryByTestId(/comic-section/)).toBeInTheDocument();
     });
 
     test("Comic data undefined not render the list of comic", async () => {
         mockUseApi.mockImplementation(() => mockDataUnloadReturn);
-        screen.debug(undefined,300000)
         render(<Comic id={"1017100"}/>);
         expect(screen.queryByTestId(/comic-section/)).not.toBeInTheDocument();
     });
     test("Comic id undefined not render the list of comic", async () => {
         mockUseApi.mockImplementation(() => mockDataUnloadReturn);
-        screen.debug(undefined,300000)
+        
         render(<Comic id={undefined}/>);
         expect(screen.queryByTestId(/comic-section/)).not.toBeInTheDocument();
     });

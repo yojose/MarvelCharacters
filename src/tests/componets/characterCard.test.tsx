@@ -66,8 +66,8 @@ describe('CharacterCard.favorites render', () => {
         customRender(<CharacterCard.FavButton />, providerProps)
 
 
-        const element = screen.getByTestId('character-car__fav').querySelector(".icon-fav--empty");
-        expect(element).toBeNull();
+        const element=(screen.getByTestId("icon-fav"));
+        expect(element).not.toHaveClass('icon-fav--empty');
 
         expect(screen.getByTestId(/character-car__fav/)).toBeInTheDocument();
     });
@@ -76,10 +76,8 @@ describe('CharacterCard.favorites render', () => {
         const providerProps = { ...favoritesNoCharacter };
 
         customRender(<CharacterCard.FavButton />, providerProps )
-
-
-        const element = screen.getByTestId('character-car__fav').querySelector(".icon-fav--empty");
-        expect(element).not.toBeNull();
+        const element=(screen.getByTestId("icon-fav"));
+        expect(element).toHaveClass('icon-fav--empty');
 
         expect(screen.getByTestId(/character-car__fav/)).toBeInTheDocument();
     });

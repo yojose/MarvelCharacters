@@ -8,7 +8,7 @@ import Comic from "../../components/Comic/comicCatalog";
 import { FavoritesContext } from "../../components/Contexts/favoritesContect"
 import useFavoritesContext from "../../hooks/useContexts/useFavoritesContext";
 import { FavoriteIcon } from "../../components/favoritesIcon/favoritesIcon";
-import {Loader} from "../../components/loader/loader"
+import { Loader } from "../../components/loader/loader"
 
 
 export const Character: React.FC = () => {
@@ -26,21 +26,23 @@ export const Character: React.FC = () => {
 
     return (
         <>
-            {isloading === true && <Loader/>}
+            {isloading === true && <Loader />}
             {(isloading === false && id !== undefined && data !== undefined) &&
                 <section className="section--no-pading">
                     <article className="character__container">
-                        <div className="character__header">
-                            <div className="character__infromation_container">
-                                <div className="character__img" data-testid="character__img">
-                                    <img loading="lazy" src={`${data?.results[0].thumbnail.path}/portrait_fantastic.${data?.results[0].thumbnail.extension}`} alt={`${data?.results[0].name} image}`}  />
-                                </div>
-                                <div className="character__information">
-                                    <div className="character__name-container">
-                                        <h2 className="character__name text--primary-color roboto-condensed--700">{data?.results[0].name}</h2>
-                                        <FavButton id={parseInt(id)} />
+                            <div className="character__header">
+                                <div className="character-border">
+                                <div className="character__infromation_container">
+                                    <div className="character__img" data-testid="character__img">
+                                        <img loading="lazy" src={`${data?.results[0].thumbnail.path}/portrait_fantastic.${data?.results[0].thumbnail.extension}`} alt={`${data?.results[0].name} image}`} />
                                     </div>
-                                    <p className="character__description roboto-condensed--700">{data?.results[0].description}</p>
+                                    <div className="character__information">
+                                        <div className="character__name-container">
+                                            <h2 className="character__name text--primary-color roboto-condensed--700">{data?.results[0].name}</h2>
+                                            <FavButton id={parseInt(id)} />
+                                        </div>
+                                        <p className="character__description roboto-condensed--700">{data?.results[0].description}</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

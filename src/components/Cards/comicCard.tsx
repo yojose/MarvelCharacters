@@ -25,7 +25,7 @@ const ComicCard = ({ children, comic }: ComicCardProps) => {
 export { ComicCard, ComicCardContext };
 
 
-ComicCard.Link = function link({ children }: PropsWithChildren) {
+ComicCard.Link = function LinkToComic({ children }: PropsWithChildren) {
     const { comic } = useComicCardContext();
     return (
         <Link to={`../character/${comic.id}`} key={1} style={{ textDecoration: "none" }}>
@@ -34,7 +34,7 @@ ComicCard.Link = function link({ children }: PropsWithChildren) {
     )
 };
 
-ComicCard.img = () => {
+ComicCard.img = function Imagen() {
     const { comic } = useComicCardContext();
     return (
         <div className="comic-card__img">
@@ -43,7 +43,7 @@ ComicCard.img = () => {
     )
 }
 
-ComicCard.Title = function title({ children }: PropsWithChildren) {
+ComicCard.Title = function Title({ children }: PropsWithChildren) {
     return (
         <div className="comic-card__information text--secondary-color">
             {children}
@@ -51,7 +51,7 @@ ComicCard.Title = function title({ children }: PropsWithChildren) {
     )
 };
 
-ComicCard.Name = function name() {
+ComicCard.Name = function ComicName() {
     const { comic } = useComicCardContext();
 
     return (
@@ -61,12 +61,12 @@ ComicCard.Name = function name() {
     )
 };
 
-ComicCard.Year = function year() {
+ComicCard.Year = function ComicYear() {
     const { comic } = useComicCardContext();
     return (
         <>{comic !== undefined &&
             <div className="comic-card__year roboto-condensed--600">
-                {comic.dates?.map((d) => {
+                {(comic.dates!==undefined) && comic.dates?.map((d) => {
                     if (d.type == "onsaleDate") {
                         const date1 = new Date(d.date);
                         return date1.getFullYear()

@@ -11,22 +11,6 @@ const defaultConfig = {
     }
 };
 
-/*const getApiKeyParams = () => {
-    const ts = new Date().getTime().toString();
-    let message = "";
-    let hash = "";
-
-    if (publickey === undefined || privatekey == undefined) {
-        throw new Error("enviroment variable not fund.");
-    } else {
-        message = `${ts}${publickey}${privatekey}`;
-        message = ts + privatekey + publickey;
-        hash = Md5.hashStr(message);
-    }
-
-    return { ts, hash }
-}*/
-
 const useApi = function useAPI<T>(path: string, options: AxiosRequestConfig = defaultConfig){
     const [data, setData] = useState<Data<T>>();
     const [isloading, setIsLoading] = useState<boolean>(true);
@@ -58,7 +42,7 @@ const useApi = function useAPI<T>(path: string, options: AxiosRequestConfig = de
 
         const fetchData = async () => {
             try {
-                const response: AxiosResponse = await axios(path, optionsAxios);
+                const response: AxiosResponse = await axios.get(path, optionsAxios);
                 setData(response.data.data);
                 
                 /*if("comic"!==(path.split("/").slice(-1).toString())){
@@ -68,6 +52,7 @@ const useApi = function useAPI<T>(path: string, options: AxiosRequestConfig = de
                 }*/
                 setIsLoading(false);
             } catch (error) {
+                console.log(error);
                 let message;
                 if (error instanceof Error) message = error.message
                 else message = String(error)
@@ -77,7 +62,7 @@ const useApi = function useAPI<T>(path: string, options: AxiosRequestConfig = de
         fetchData();
 
         return () => {
-            
+            abortControllerRef.current?.abort();
         }
     }, [options]);
 

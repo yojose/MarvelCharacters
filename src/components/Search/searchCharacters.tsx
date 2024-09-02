@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import useCharactersContext from "../../hooks/useContexts/useCharactersContext"
 import '../../styles/search.css';
-import {seachCharacters} from "../../types/searchCharactersTypes";
+import { seachCharacters } from "../../types/searchCharactersTypes";
 import { useDelay } from "../../hooks/useDelay";
 
-const SearchCharacters = ({onChange,disable}:seachCharacters, ) => {
+const SearchCharacters = ({ onChange, disable }: seachCharacters,) => {
     const [search, setSearch] = useState('');
     const delaySearch = useDelay(search);
 
@@ -17,9 +17,9 @@ const SearchCharacters = ({onChange,disable}:seachCharacters, ) => {
             <div className="search__container">
                 <form action="#" method="get" className="search__form">
                     <div className="icon__search"></div>
-                    <label className="search__character-label">
+                    <div className="search__character-label roboto-condensed--400">
                         <input
-                            className={(search==="")?"search__input":"search__input--active"}
+                            className={(search === "") ? "search__input" : "search__input--active"}
                             type="text"
                             name="search_character"
                             id="search_character"
@@ -29,7 +29,7 @@ const SearchCharacters = ({onChange,disable}:seachCharacters, ) => {
                             disabled={disable}
                             onChange={(e) => setSearch(e.target.value)}
                             data-testid="searchInput" />
-                    </label>
+                    </div>
                 </form>
                 <SearchCharactersResult />
             </div>
@@ -40,6 +40,6 @@ const SearchCharacters = ({onChange,disable}:seachCharacters, ) => {
 
 const SearchCharactersResult = () => {
     const CharactersContext = useCharactersContext();
-    return (<div className="search__result">{CharactersContext?.count} RESULT</div>);
+    return (<div className="search__result roboto-condensed--400">{CharactersContext?.count} RESULT</div>);
 }
 export default SearchCharacters;

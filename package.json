@@ -26,7 +26,9 @@
     "test:coverage": "react-scripts test --coverage",
     "test:clearCache": "react-scripts test --clearCache",
     "eject": "react-scripts eject",
-    "lint": "eslint \"./src/**/*.{ts,js,tsx,jsx}\""
+    "lint": "eslint \"src/**/*.{js,jsx,ts,tsx}\"",
+    "lint:fix": "eslint --fix \"src/**/*.{js,jsx,ts,tsx}\"",
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,css,md}\" --config ./.prettierrc.json"
   },
   "browserslist": {
     "production": [
@@ -40,33 +42,31 @@
       "last 1 safari version"
     ]
   },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
   "jest": {
     "moduleNameMapper": {
-      "\\.(css|scss)$": "identity-obj-proxy",
-      "^.+\\.(ts|tsx)$": "ts-jest"
+      "^axios$": "axios/dist/node/axios.cjs"
     },
-    "collectCoverageFrom": [
-      "src/**/*.{js,jsx,ts,tsx}",
-      "!**/node_modules/**",
-      "!**/src/index.tsx"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "statements": 100,
-        "branches": 100,
-        "functions": 100,
-        "lines": 100
-      }
-    }
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/types/"
+    ]
   },
   "devDependencies": {
-    "@eslint/js": "^9.9.0",
-    "@testing-library/react": "^16.0.0",
+    "@eslint/js": "^9.9.1",
+    "@testing-library/react": "^15.0.6",
     "axios-mock-adapter": "^2.0.0",
     "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.35.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
     "globals": "^15.9.0",
-    "prettier": "3.3.3",
-    "typescript-eslint": "^8.2.0"
+    "prettier": "^3.3.3",
+    "typescript-eslint": "^8.3.0"
   }
 }

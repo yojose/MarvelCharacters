@@ -4,7 +4,7 @@ import "../../styles/loader.css"
 export const Loader: React.FC = () => {
     return (
         <>
-            <div className="loader"></div>
+            <div className="loader" data-testid="loader"></div>
         </>
     )
 }

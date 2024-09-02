@@ -8,6 +8,7 @@
 .section{
   width: calc(100% - 32pX);
   padding: 16px;
+  max-width: 1416px;
 }
 
 .section--no-pading{
@@ -16,4 +17,7 @@
 
 .main{
   width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }

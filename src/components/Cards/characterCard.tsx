@@ -33,13 +33,13 @@ export { CharacterCard, CharacterCardContext };
 
 
 
-CharacterCard.Title = function title({ children }: PropsWithChildren) {
+CharacterCard.Title = function Title({ children }: PropsWithChildren) {
     const { character } = useCharacterCardContext();
     return (
         <>
         {(character.id !==undefined) &&
         <Link to={`../character/${character.id}`} key={1} style={{ textDecoration: "none" }}>
-            <div className="character-card__info">
+            <div className="character-card__info roboto-condensed--400">
                 {children}
             </div>
         </Link>
@@ -53,7 +53,7 @@ CharacterCard.Title = function title({ children }: PropsWithChildren) {
     )
 };
 
-CharacterCard.img = () => {
+CharacterCard.Imagen = function Imagen(){
     const { character } = useCharacterCardContext();
     return (
         <div className="character-card_img">
@@ -62,7 +62,7 @@ CharacterCard.img = () => {
     )
 }
 
-CharacterCard.Name = function name() {
+CharacterCard.Name = function Name() {
     const { character } = useCharacterCardContext();
 
     return (
@@ -72,7 +72,7 @@ CharacterCard.Name = function name() {
     )
 };
 
-CharacterCard.FavButton = function facButton() {
+CharacterCard.FavButton = function FavButton() {
     const { character } = useCharacterCardContext();
     const { favorites } = useContext(FavoritesContext);
     const { changeFavoritos, isOnFavoritos } = useFavoritesContext();
@@ -84,7 +84,7 @@ CharacterCard.FavButton = function facButton() {
         } else {
             return false;
         }
-    }, [id, favorites]);
+    }, [id, favorites,isOnFavoritos]);
 
     const HandleClick = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
         e.stopPropagation();
@@ -94,7 +94,6 @@ CharacterCard.FavButton = function facButton() {
 
     return (
         <div className="character-car__fav" onClick={HandleClick} data-testid="character-car__fav">
-            {isFavorito.toString()}
             <FavoriteIcon isFavorite={isFavorito}/>
         </div>
     )

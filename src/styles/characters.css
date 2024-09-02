@@ -4,14 +4,13 @@
     height: auto;
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    gap: 10px;
+    gap: 16px;
     row-gap: 25px;
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
 }
 .character-card{
-    width:172.5px;
-    height:245.97px;
+    width: 188.57px;
+    height: 245.97px;
 }
 .character-card-border::after {
     border-color: transparent #fff transparent transparent;
@@ -26,8 +25,8 @@
     background-color: rgb(0 0 0);
 }
 .character-card-border{
-    width:172.5px;
-    height:245.97px;
+    width: 188.57px;
+    height: 245.97px;
     position: absolute;
     text-decoration: none;
     & :hover {
@@ -43,13 +42,16 @@
     justify-content: center;
 }
 .character-card_img{
-    width:172.5px;
+    width: 188.57px;
     height: 175px;
     overflow: hidden;
     border-bottom: 4px solid var(--primary-color);
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
 
     > img{
-        width:172.5px;
+        width:188.57px;
     }
 }
 .character-card__info{
