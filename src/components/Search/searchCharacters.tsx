@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
-import useCharactersContext from "../../hooks/useContexts/useCharactersContext"
-import '../../styles/search.css';
-import { seachCharacters } from "../../types/searchCharactersTypes";
-import { useDelay } from "../../hooks/useDelay";
+import React, { useState, useEffect } from 'react'
+import useCharactersContext from '../../hooks/useContexts/useCharactersContext'
+import '../../styles/search.css'
+import { seachCharacters } from '../../types/searchCharactersTypes'
+import { useDelay } from '../../hooks/useDelay'
 
-const SearchCharacters = ({ onChange, disable }: seachCharacters,) => {
-    const [search, setSearch] = useState('');
-    const delaySearch = useDelay(search);
+const SearchCharacters = ({ onChange, disable }: seachCharacters) => {
+    const [search, setSearch] = useState('')
+    const delaySearch = useDelay(search)
 
     useEffect(() => {
-        onChange(delaySearch);
-    }, [delaySearch]);
+        onChange(delaySearch)
+    }, [delaySearch])
 
     return (
         <div className="search" data-testid="search">
@@ -19,7 +19,11 @@ const SearchCharacters = ({ onChange, disable }: seachCharacters,) => {
                     <div className="icon__search"></div>
                     <div className="search__character-label roboto-condensed--400">
                         <input
-                            className={(search === "") ? "search__input" : "search__input--active"}
+                            className={
+                                search === ''
+                                    ? 'search__input'
+                                    : 'search__input--active'
+                            }
                             type="text"
                             name="search_character"
                             id="search_character"
@@ -28,18 +32,22 @@ const SearchCharacters = ({ onChange, disable }: seachCharacters,) => {
                             value={search}
                             disabled={disable}
                             onChange={(e) => setSearch(e.target.value)}
-                            data-testid="searchInput" />
+                            data-testid="searchInput"
+                        />
                     </div>
                 </form>
                 <SearchCharactersResult />
             </div>
         </div>
-
     )
 }
 
 const SearchCharactersResult = () => {
-    const CharactersContext = useCharactersContext();
-    return (<div className="search__result roboto-condensed--400">{CharactersContext?.count} RESULT</div>);
+    const CharactersContext = useCharactersContext()
+    return (
+        <div className="search__result roboto-condensed--400">
+            {CharactersContext?.count} RESULT
+        </div>
+    )
 }
-export default SearchCharacters;
+export default SearchCharacters

@@ -1,12 +1,12 @@
-import {useContext } from "react";
-import {ComicCardContext} from "../../components/Cards/comicCard";
+import { useContext } from 'react'
+import { ComicCardContext } from '../../components/Cards/comicCard'
 
-const useComicCardContext=()=>{
-    const context = useContext(ComicCardContext);
+const useComicCardContext = () => {
+    const context = useContext(ComicCardContext)
     if (!context) {
-        throw new Error('ComicCardContext must use on ComicCard component');
+        throw new Error('ComicCardContext must use on ComicCard component')
     }
-    return context;
+    return context
 }
 
-export default  useComicCardContext;
+export default useComicCardContext

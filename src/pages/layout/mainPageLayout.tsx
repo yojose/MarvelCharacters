@@ -1,6 +1,6 @@
-import React from "react"
-import { Outlet } from "react-router-dom";
-import { Header } from "../../components/Header/Header"
+import React from 'react'
+import { Outlet } from 'react-router-dom'
+import { Header } from '../../components/Header/Header'
 
 export const MainPageLayout: React.FC = () => {
     return (
@@ -11,5 +11,4 @@ export const MainPageLayout: React.FC = () => {
             </main>
         </div>
     )
-
 }

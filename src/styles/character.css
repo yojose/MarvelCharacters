@@ -23,16 +23,16 @@
     border-style: solid;
     border-width: 20px 20px 0 0;
     bottom: 0px;
-    content: "";
+    content: '';
     position: absolute;
     right: 0;
     top: auto;
     z-index: 40;
     background-color: var(--secondary-color);
 }
-.character__infromation_container{
+.character__infromation_container {
     max-width: 960px;
-    width: 100%;;
+    width: 100%;
     min-height: 320px;
     display: flex;
     flex-direction: row;
@@ -43,7 +43,7 @@
     height: 320px;
     overflow: hidden;
 
-    >img {
+    > img {
         width: 320px;
     }
 }
@@ -103,7 +103,7 @@
         border-style: solid;
         border-width: 20px 20px 0 0;
         bottom: 0;
-        content: "";
+        content: '';
         position: absolute;
         right: 29px;
         top: auto;
@@ -126,7 +126,7 @@
         flex-wrap: wrap;
         align-content: center;
 
-        >img {
+        > img {
             width: 100%;
             max-width: 450px;
             min-height: 320px;
@@ -151,5 +151,4 @@
         font-size: 16px;
         color: var(--text-primary-color);
     }
-  }
-
+}

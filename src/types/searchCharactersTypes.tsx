@@ -1,4 +1,4 @@
-export interface seachCharacters{
-    onChange: (value: string) => void;
-    disable:boolean;
+export interface seachCharacters {
+    onChange: (value: string) => void
+    disable: boolean
 }

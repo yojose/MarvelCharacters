@@ -1,26 +1,26 @@
-import { PropsWithChildren } from 'react';
-import {CharacterResult} from "./apiTypes";
+import { PropsWithChildren } from 'react'
+import { CharacterResult } from './apiTypes'
 
 export interface CharacterCardProps extends PropsWithChildren {
-    character: CharacterResult | undefined;
-};
+    character: CharacterResult | undefined
+}
 
 export interface UseCharacterCardContext {
-    character: CharacterResult;
-};
+    character: CharacterResult
+}
 
 export interface CharacterCardImg {
-    src:string;
-};
+    src: string
+}
 
-export interface optionAxios{
-    method: string,
+export interface optionAxios {
+    method: string
     params: {
-        ts?:string,
-        limit?: number,
-        offset?:number,
-        apikey?:string,
-        hash?:string,
-        nameStartsWith?:string
+        ts?: string
+        limit?: number
+        offset?: number
+        apikey?: string
+        hash?: string
+        nameStartsWith?: string
     }
 }

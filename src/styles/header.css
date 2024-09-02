@@ -13,7 +13,6 @@
         flex-direction: row;
         justify-content: space-between;
 
-
         & .header__marvel-logo {
             width: 130px;
             height: 52px;
@@ -30,7 +29,7 @@
                 height: 21.68px;
             }
 
-            >a {
+            > a {
                 width: 56px;
                 height: 37.68px;
                 gap: 8px;
@@ -44,7 +43,6 @@
 .header--greenbg {
     background-color: greenyellow;
 }
-
 
 .centerdiv {
     min-height: 100vh;

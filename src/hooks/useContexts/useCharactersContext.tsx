@@ -1,7 +1,7 @@
-import {useContext } from "react";
-import {CharactersContext} from "../../pages/characters/characters";
+import { useContext } from 'react'
+import { CharactersContext } from '../../pages/characters/characters'
 
 export default function useCharactersContext() {
-    const context = useContext(CharactersContext);
-    return context;
+    const context = useContext(CharactersContext)
+    return context
 }

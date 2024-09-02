@@ -1,6 +1,6 @@
-export type favorites = Array<number>;
+export type favorites = Array<number>
 
-export interface favoritesContextType{
-  favorites:favorites;
-  setFavorites:React.Dispatch<React.SetStateAction<favorites>>;
+export interface favoritesContextType {
+    favorites: favorites
+    setFavorites: React.Dispatch<React.SetStateAction<favorites>>
 }
