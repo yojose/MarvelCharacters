@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from '@testing-library/react';
-import {Loader} from "../../components/loader/loader"
+import {Loader} from "../../components/Loader/loader"
 
 
 

@@ -6,7 +6,7 @@ import useCharacterCardContext from "../../hooks/useCharacters/useCharacterCardC
 import '../../styles/characters.css';
 import { FavoritesContext } from "../../components/Contexts/favoritesContect";
 import useFavoritesContext from "../../hooks/useContexts/useFavoritesContext";
-import { FavoriteIcon } from "../../components/favoritesIcon/favoritesIcon"
+import { FavoriteIcon } from "../ShowfavoritesIcon/favoritesIcon"
 
 const CharacterCardContext = createContext<UseCharacterCardContext | undefined>(undefined);
 

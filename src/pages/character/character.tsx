@@ -7,8 +7,8 @@ import '../../styles/character.css';
 import Comic from "../../components/Comic/comicCatalog";
 import { FavoritesContext } from "../../components/Contexts/favoritesContect"
 import useFavoritesContext from "../../hooks/useContexts/useFavoritesContext";
-import { FavoriteIcon } from "../../components/favoritesIcon/favoritesIcon";
-import { Loader } from "../../components/loader/loader"
+import { FavoriteIcon } from "../../components/ShowfavoritesIcon/favoritesIcon";
+import { Loader } from "../../components/Loader/loader"
 
 
 export const Character: React.FC = () => {

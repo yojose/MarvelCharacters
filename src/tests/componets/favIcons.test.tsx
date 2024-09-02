@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from '@testing-library/react';
-import {FavoriteIcon} from '../../components/favoritesIcon/favoritesIcon';
+import {FavoriteIcon} from '../../components/ShowfavoritesIcon/favoritesIcon';
 
 describe('FavoriteIcon', () => {
     test("FavoriteIcon data CharacterResult[] render the list of comic", async () => {

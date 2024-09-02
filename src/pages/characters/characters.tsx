@@ -9,7 +9,7 @@ import { optionAxios } from "../../types/charactersTypes";
 import useFavoritesFilter from "../../hooks/filters/useFavoritesFilter";
 import useCharactersContext from "../../hooks/useContexts/useCharactersContext"
 import { useParams } from "react-router-dom";
-import {Loader} from "../../components/loader/loader";
+import {Loader} from "../../components/Loader/loader";
 import { charactersLimit } from "../../configs/config";
 
 export const CharactersContext = createContext<Data<CharacterResult[]> | undefined>(undefined);

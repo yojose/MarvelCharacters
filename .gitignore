@@ -27,6 +27,3 @@ yarn-error.log*
 semanticHtmlTemplate.html
 config/
 .vcode/
-
-src/api/testData.tsx
-src/api/testDataComic.tsx
