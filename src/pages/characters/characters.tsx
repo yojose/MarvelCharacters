@@ -64,7 +64,8 @@ export const Characters: React.FC = () => {
                 },
             })
         }
-    }, [search,isFavoritesFiltered,notFilter])
+    // eslint-disable-next-line
+    }, [search])
 
     const onChangeSearch = useCallback((value: string) => {
         setSearch(value)
