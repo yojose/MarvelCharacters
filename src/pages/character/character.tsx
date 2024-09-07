@@ -1,4 +1,4 @@
-import React, {useMemo, useRef } from 'react'
+import React, {useMemo, useRef} from 'react'
 import { useParams } from 'react-router-dom'
 import useApi from '../../hooks/useApi/useApi'
 import { CharacterResult } from '../../types/apiTypes'
