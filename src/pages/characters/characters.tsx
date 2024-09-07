@@ -64,7 +64,7 @@ export const Characters: React.FC = () => {
                 },
             })
         }
-    // eslint-disable-next-line
+        // eslint-disable-next-line
     }, [search])
 
     const onChangeSearch = useCallback((value: string) => {
@@ -78,7 +78,7 @@ export const Characters: React.FC = () => {
             >
                 {
                     <>
-                        {isloading === false && <Loader />}
+                        {isloading === true && <Loader />}
                         <section className="section">
                             {favoritesFilter !== undefined && (
                                 <h2 style={{ color: 'black' }}>FAVORITES</h2>
