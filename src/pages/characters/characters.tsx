@@ -91,6 +91,7 @@ export const Characters: React.FC = () => {
                                     <SearchCharacters
                                         onChange={onChangeSearch}
                                         disable={false}
+                                        searchValue={search}
                                     />
                                     <MemoCharactersCards />
                                 </div>

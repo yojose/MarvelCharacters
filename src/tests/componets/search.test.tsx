@@ -26,7 +26,7 @@ describe('SearchCharacters', () => {
     test('render search', async () => {
         const providerProps = { ...datasWithCharacters }
         customRender(
-            <SearchCharacters onChange={jest.fn()} disable={false} />,
+            <SearchCharacters onChange={jest.fn()} disable={false} searchValue={""}/>,
             providerProps
         )
         const element = screen.getByTestId(/searchInput/)

@@ -4,8 +4,8 @@ import '../../styles/search.css'
 import { seachCharacters } from '../../types/searchCharactersTypes'
 import { useDelay } from '../../hooks/useDelay'
 
-const SearchCharacters = ({ onChange, disable }: seachCharacters) => {
-    const [search, setSearch] = useState('')
+const SearchCharacters = ({ onChange, disable, searchValue }: seachCharacters) => {
+    const [search, setSearch] = useState(searchValue)
     const delaySearch = useDelay(search)
     
     useEffect(() => {
